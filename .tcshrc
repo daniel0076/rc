@@ -1,0 +1,22 @@
+
+umask 22
+setenv LC_ALL en_US.UTF-8
+
+set nobeep
+set autolist
+set notify
+set color
+
+setenv LS_COLORS ':no=00:fi=00:di=01;36:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.c=01;33:*.cpp=01;33:*.MP3=01;44;37:*.mp3=01;44;37:*.pl=01;33:';
+
+#alias <ins> <alias ins>
+alias ls 'ls -lF --color '
+alias ll 'ls -aFl --color'
+alias h  'history'
+alias write 'env LC_CTYPE=en_US.ISO8859-1 write'
+alias talk 'env LC_CTYPE=en_US.ISO8859-1 talk'
+alias wall 'env LC_CTYPE=en_US.ISO8859-1 wall'
+
+if ($?prompt) then
+    set prompt="%{^[[1;36m%}%T%{^[[m%}%{^[[1;33m%}%n%{^[[m%}@%{^[[1;37m%}%m%{^[[1;32m%}[%~]%{^[[m%} >"
+endif

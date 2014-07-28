@@ -1,0 +1,34 @@
+#2014/06/22 modified by Daniel
+#tips：看鍵盤按鍵對應的code：showkey -a
+#F1-F9 ->K1-k9, F10=K,F11=F1,F12=F2
+#其它對應請看showkey -a自己按(PS，要看ctrl不能只按ctrl,要按ctrl+某鍵)
+
+# 關閉啟動訊息。
+startup_message off
+
+# Caption
+caption always "%{YK}%-w%<%{=B GK}%n %t%{= KY}%+w"
+#caption always "%{=u .r} %-w%<%{=ub .Y}%n %t%{=u .r}%+w "
+#caption always "%{=u .G} %-w%<%{=ub .y}%n %t%{=u .G}%+w "
+#caption always "%{bw} %M/%d %D %C%A %{wb} %-w%{y}%n %t%{w}%+w%{k}"
+#caption always "%{= wk} %{= KY} [%n]%t @ %H %{-} %= %{= KR} %l %{-} | %{= KG} %Y-%m-%d %{-} "
+
+# hardstatus alwaysignore
+# hardstatus alwayslastline "%{= .K} [%l]%<%=%{= .Y}$USER%{= .R}@%H %=%{= .m} %Y/%m/%d%{= .M} %0c "
+hardstatus alwayslastline "%{=b BW} {%l} %{WK}%=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
+# hardstatus alwayslastline "%{=b BW} {%l}%018=%{=B WK} %H %-30= %{YK} %Y/%m/%d(%D) %{BW} %C %A"
+# hardstatus alwayslastline "%{=b BW} {%l}%018=%{=B WK} $USER%{=B WK }@%H %=%{= YK} %Y/%m/%d%{= BW} %0c"
+# hardstatus alwayslastline " %-Lw%{= Bw}%n%f %t%{-}%+Lw %=| %0c:%s "
+
+# 編碼切換
+bind b encoding big5 utf8
+bind u encoding utf8 utf8
+defencoding utf8
+
+ bindkey "^[n" screen # F9 : 新增子視窗。(C-a c)
+ bindkey "^[m" kill   # F10 : 關閉當前視窗。 (C-a k)
+ bindkey "^[." next   #alt+> next
+ bindkey "^[," prev   #alt+< prev
+
+
+
