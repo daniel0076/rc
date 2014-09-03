@@ -1,0 +1,15 @@
+[color]
+	ui = true
+[core]
+	editor = /usr/local/bin/vim
+[user]
+	name = Daniel Tsai
+	email = idaniel.twc@gmail.com
+[alias]
+	lg = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	co = commit
+	st = status
+	ch = checkout
+	br = branch
+[credential]
+	helper = cache --timeout=3600
