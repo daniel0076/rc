@@ -15,7 +15,10 @@ caption always "%{YK}%-w%<%{=B GK}%n %t%{= KY}%+w"
 
 # hardstatus alwaysignore
 # hardstatus alwayslastline "%{= .K} [%l]%<%=%{= .Y}$USER%{= .R}@%H %=%{= .m} %Y/%m/%d%{= .M} %0c "
-hardstatus alwayslastline "%{=b BW} {%l} %{WK}%=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
+#for mac only
+hardstatus alwayslastline "%{=b BW} {%l} %{WK}%44=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
+#for linux or other
+# hardstatus alwayslastline "%{=b BW} {%l} %{WK}%=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
 # hardstatus alwayslastline "%{=b BW} {%l}%018=%{=B WK} %H %-30= %{YK} %Y/%m/%d(%D) %{BW} %C %A"
 # hardstatus alwayslastline "%{=b BW} {%l}%018=%{=B WK} $USER%{=B WK }@%H %=%{= YK} %Y/%m/%d%{= BW} %0c"
 # hardstatus alwayslastline " %-Lw%{= Bw}%n%f %t%{-}%+Lw %=| %0c:%s "
@@ -25,10 +28,7 @@ bind b encoding big5 utf8
 bind u encoding utf8 utf8
 defencoding utf8
 
- bindkey "^[n" screen # F9 : 新增子視窗。(C-a c)
- bindkey "^[m" kill   # F10 : 關閉當前視窗。 (C-a k)
- bindkey "^[." next   #alt+> next
- bindkey "^[," prev   #alt+< prev
-
-
-
+bindkey "^[n" screen # F9 : 新增子視窗。(C-a c)
+bindkey "^[m" kill   # F10 : 關閉當前視窗。 (C-a k)
+bindkey "^[." next   #alt+> next
+bindkey "^[," prev   #alt+< prev
