@@ -9,6 +9,7 @@ set color
 #setenv PATH $PATH\:/usr/local/go/bin
 #setenv GOPATH "$HOME/go/"
 
+#make ls looks better in colors
 setenv CLICOLOR yes
 setenv LSCOLORS GxFxFxDxBxegedabagGxGx
 #1. directory
@@ -24,8 +25,9 @@ setenv LSCOLORS GxFxFxDxBxegedabagGxGx
 #11.directory writable to others, without sticky bit
 
 #alias <ins> <alias ins>
-alias ls 'ls -hl'
-alias ll 'ls -hla'
+#use -F to show file attribute
+alias ls 'ls -hlF'
+alias ll 'ls -hlaF'
 alias h  'history'
 #alias sd  'cd /Volumes/SD/'
 #for macbook:replace built-in vim

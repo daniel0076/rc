@@ -11,5 +11,6 @@
 	st = status
 	ch = checkout
 	br = branch
+	df = diff
 [credential]
 	helper = cache --timeout=3600
