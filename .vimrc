@@ -404,7 +404,7 @@ Bundle 'osyo-manga/vim-marching'
 "Python complete
 Bundle 'davidhalter/jedi-vim'
 " Python and PHP Debugger
-Bundle 'fisadev/vim-debug.vim'
+"Bundle 'fisadev/vim-debug.vim'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
