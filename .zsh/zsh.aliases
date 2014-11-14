@@ -1,0 +1,23 @@
+OS=`env uname -s`
+if [[ $OS == "Linux" ]]; then
+	#LS_COLORS='no=00:fi=00:di=01;36:ln=35:so=32:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43'
+	alias l='env ls --color'
+	alias ls='env ls -hl --color'
+	alias ll='env ls -hlaF --color'
+else
+	#for mac/bsd -G to enable color
+	#LS_COLORS='no=00:fi=00:di=01;36:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43'
+	#LSCOLORS=Gxfxcxdxbxegedabagacad
+	alias l='ls -GF'
+	alias ls='ls -hlGF'
+	alias ll='ls -hlaGF'
+fi
+if [[ $OS == "Darwin" ]];then
+	alias sd="cd /Volumes/SD/"
+fi
+
+#generic aliases
+alias sc="screen"
+alias mushr00m="mosh daniel@mushr00m.nba.nctu.edu.tw"
+alias oh="mosh mushr00m@openhouse.nctu.edu.tw"
+alias duty="ssh mushr00m@duty.nba.nctu.edu.tw"

@@ -16,10 +16,11 @@ syntax on
 "airline的status bar正常運作，用來設定亞洲字形用幾格來顯示
 set ambiwidth=single
 " 用空白來當作tab (et)
-set noexpandtab
+set expandtab
 " 定義tab 的空格數 (ts)
 set tabstop=4
 au FileType python set tabstop=4
+au FileType html,xml,css set tabstop=2
 au FileType python set noexpandtab
 " 自動縮排所使用的空格數 (sw)
 set shiftwidth=4
@@ -261,22 +262,21 @@ set tm=500
 "cmap !clang++   !clang++ -std=c++11 -g -Wall -Wextra -pedantic % -lm -g -o %:r.out
 "cmap !clang+r   !clang++ && ./%:r.out
 
-au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Wextra\ -pedantic\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType cpp set makeprg=g++-4.8\ -std=c++11\ -g\ -Wall\ -Wextra\ -pedantic\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType cpp set makeprg=g++-4.8\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "會依照上面的map
 "python時，F9是python3，Ctrl+F9是python2
 "au   FileType   c        map   <F9>     :w<CR>:make && ./%:r.out<CR>
 "au   FileType   c        map   <F9>     :w<CR>:!gcr<CR>
-au   FileType   c,cpp     noremap   <F9>     :w<CR>:make<CR>
+au   FileType   c,cpp     noremap   <F9>     :w<CR>:make && ./%:r.out<CR>
 au   FileType   c,cpp     noremap   <F8>   :w<CR>:!./%:r.out<CR>
 au   FileType   python    noremap   <F9>     :w<CR>:!python3   %<CR>
-au   FileType   python    noremap   <F8>   :w<CR>:!python2.7   %<CR>
+au   FileType   python    noremap   <F8>   :w<CR>:!python2   %<CR>
 au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>
-au   FileType   go        noremap   <F9>     :w<CR>:!go run      %<CR>
-au   FileType   sh       map   <F9>     :w<CR>:!sh        %<CR>
-au   FileType   sh       map   <C-F9>   :w<CR>:!bash        %<CR>
+au   FileType   sh       map   <F9>     :w<CR>:!sh %
+au   FileType   sh       map   <C-F9>   :w<CR>:!bash %<CR>
 
 "F11為使用gdb (c,cpp)
 "au   FileType   c,cpp    map   <F11>    :!gdb   -q   %<   <CR>
@@ -396,8 +396,6 @@ endif
 
 " Plugins from github repos:
 "golang syntax
-Bundle 'golangtw/go.vim'
-Bundle 'golangtw/gocode.vim'
 "C/C++ complete
 Bundle 'Shougo/vimproc.vim'
 Bundle 'osyo-manga/vim-marching'
@@ -411,10 +409,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Class/module browser
 Bundle 'majutsushi/tagbar'
-" Code and files fuzzy finder
-"Bundle 'kien/ctrlp.vim'
-" Extension to ctrlp, for fuzzy command finder
-"Bundle 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Bundle 'mattn/emmet-vim'
 " Git integration
@@ -444,35 +438,12 @@ Bundle 'Shougo/neosnippet-snippets'
 "Snippets manager (SnipMate), dependencies, and snippets repo
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-"Bundle 'honza/vim-snippets'
-"Bundle 'garbas/vim-snipmate'
-" Git/mercurial/others diff icons on the side of the file lines
-"Bundle 'mhinz/vim-signify'
-" Automatically sort python imports
-Bundle 'fisadev/vim-isort'
-" Drag visual blocks arround
-"Bundle 'fisadev/dragvisuals.vim'
-" Window chooser
-"Bundle 't9md/vim-choosewin'
 " Python and other languages code checker
 Bundle 'scrooloose/syntastic'
-" Relative numbering of lines (0 is the current line)
-" (disabled by default because is very intrusive and can't be easily toggled
-" on/off. When the plugin is present, will always activate the relative
-" numbering every time you go to normal mode. Author refuses to add a setting
-" to avoid that)
-" Bundle 'myusuf3/numbers.vim'
-
-" Plugins from vim-scripts repos:
-
-" Search results counter
-Bundle 'IndexedSearch'
 " XML/HTML tags navigation
 Bundle 'matchit.zip'
 " Gvim colorscheme
 Bundle 'Wombat'
-" Yank history navigation
-Bundle 'YankRing.vim'
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -596,6 +567,7 @@ map <F2> :TaskList<CR>
 "}}}
 "               " Syntastic ------------------------------{{{
 
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
 function! ToggleLocationList()
 	if g:loaded_syntastic_loclist == 0
 		let g:loaded_syntastic_loclist = 1
@@ -763,4 +735,3 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "}}}
 "}}}
-"z
