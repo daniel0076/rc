@@ -43,11 +43,8 @@ if(-e \/usr\/local\/bin\/git) then
 endif
 
 #alias <ins> <alias ins>
-alias py 'python3'
+alias py3 'python3'
 alias sc 'screen'
-alias mushr00m "mosh daniel@mushr00m.nba.nctu.edu.tw"
-alias oh "mosh mushr00m@openhouse.nctu.edu.tw"
-alias duty="ssh mushr00m@duty.nba.nctu.edu.tw"
 alias sd  'cd /Volumes/SD/'
 
 if ($?prompt) then

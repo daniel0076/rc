@@ -1,14 +1,24 @@
+#source other zsh configs
+if [[ -f $HOME/rc/.zsh/zsh.env ]];then
+    source $HOME/rc/.zsh/zsh.env
+fi
+if [[ -f $HOME/rc/.zsh/zsh.prompt ]];then
+    source $HOME/rc/.zsh/zsh.prompt
+fi
+if [[ -f $HOME/rc/.zsh/zsh.aliases ]];then
+    source $HOME/rc/.zsh/zsh.aliases
+fi
+
 # The following lines were added by compinstall
 autoload -Uz compinit
 compinit
-autoload -U colors
-colors
 
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' menu select=2 # if there is more than 2 options,auto select the entries
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle :compinstall filename '/home/daniel/.zshrc'
 
+# End of lines configured by zsh-newuser-install
 # End of lines added by compinstall
 
 # Lines configured by zsh-newuser-install
@@ -16,17 +26,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
-# End of lines configured by zsh-newuser-install
-#source other zsh configs
-if [[ -f $HOME/rc/.zsh/zsh.env ]];then
-	source $HOME/rc/.zsh/zsh.env
-fi
-if [[ -f $HOME/rc/.zsh/zsh.prompt ]];then
-	source $HOME/rc/.zsh/zsh.prompt
-fi
-if [[ -f $HOME/rc/.zsh/zsh.aliases ]];then
-	source $HOME/rc/.zsh/zsh.aliases
-fi
+
 #bindkey from pi314 github repo
 bindkey "\e[H" beginning-of-line
 bindkey "\e[1~" beginning-of-line # for screen

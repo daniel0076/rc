@@ -1,12 +1,12 @@
 OS=`env uname -s`
 if [[ $OS == "Linux" ]]; then
-    alias l='env ls --color'
-    alias ls='env ls -hl --color'
+    alias l='env ls -F --color'
+    alias ls='env ls -Fhl --color'
     alias ll='env ls -hlaF --color'
 else
-    alias l='ls -GF'
-    alias ls='ls -hlGF'
-    alias ll='ls -hlaGF'
+    alias l='env ls -GF'
+    alias ls='env ls -hlGF'
+    alias ll='env ls -hlaGF'
 fi
 if [[ $OS == "Darwin" ]];then
     alias sd="cd /Volumes/SD/"
@@ -14,6 +14,3 @@ fi
 
 #generic aliases
 alias sc="screen"
-alias mushr00m="mosh daniel@mushr00m.nba.nctu.edu.tw"
-alias oh="mosh mushr00m@openhouse.nctu.edu.tw"
-alias duty="ssh mushr00m@duty.nba.nctu.edu.tw"
