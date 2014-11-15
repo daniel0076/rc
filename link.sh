@@ -1,5 +1,5 @@
 #!/bin/sh
-files=`env ls|grep -v "link.sh"`
+files=`env ls|grep -v "\."`
 dir=`env pwd`
 for f in $files;do
     if [ -L $HOME/.${f} ];then
