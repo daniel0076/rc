@@ -4,6 +4,6 @@ RCs
 
 ---
 ## Usage
-+ Please put the repo in $HOME
++ `git clone https://github.com/daniel0076/rc.git` in you $HOME
 + execute `link.sh` , will auto link them to you $HOME
 + Modified the link in zshrc if you move .zsh to other places
