@@ -19,9 +19,8 @@ set ambiwidth=single
 set expandtab
 " 定義tab 的空格數 (ts)
 set tabstop=4
-au FileType python set tabstop=4
 au FileType html,xml,css set tabstop=2
-au FileType python set noexpandtab
+au FileType html,xml,css set shiftwidth=2
 " 自動縮排所使用的空格數 (sw)
 set shiftwidth=4
 " 顯示行號
@@ -263,7 +262,9 @@ set tm=500
 "cmap !clang+r   !clang++ && ./%:r.out
 
 au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType cpp set makeprg=g++-4.8\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType cpp set makeprg=g++\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType go  set makeprg=go\ run\ %
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "會依照上面的map
@@ -271,7 +272,7 @@ au FileType cpp set makeprg=g++-4.8\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r
 "au   FileType   c        map   <F9>     :w<CR>:make && ./%:r.out<CR>
 "au   FileType   c        map   <F9>     :w<CR>:!gcr<CR>
 au   FileType   c,cpp     noremap   <F9>     :w<CR>:make && ./%:r.out<CR>
-au   FileType   c,cpp     noremap   <F8>   :w<CR>:!./%:r.out<CR>
+au   FileType   go     noremap   <F8>   :w<CR>:make<CR>
 au   FileType   python    noremap   <F9>     :w<CR>:!python3   %<CR>
 au   FileType   python    noremap   <F8>   :w<CR>:!python2   %<CR>
 au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>

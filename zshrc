@@ -1,14 +1,14 @@
 #source other zsh configs
-if [[ -f $HOME/rc/.zsh/zsh.env ]];then
-    source $HOME/rc/.zsh/zsh.env
-fi
-if [[ -f $HOME/rc/.zsh/zsh.prompt ]];then
-    source $HOME/rc/.zsh/zsh.prompt
-fi
-if [[ -f $HOME/rc/.zsh/zsh.aliases ]];then
-    source $HOME/rc/.zsh/zsh.aliases
-fi
 
+if [[ -f $HOME/rc/zsh/zsh.env ]];then
+    source $HOME/rc/zsh/zsh.env
+fi
+if [[ -f $HOME/rc/zsh/zsh.prompt ]];then
+    source $HOME/rc/zsh/zsh.prompt
+fi
+if [[ -f $HOME/rc/zsh/zsh.aliases ]];then
+    source $HOME/rc/zsh/zsh.aliases
+fi
 # The following lines were added by compinstall
 autoload -Uz compinit
 compinit
@@ -26,6 +26,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
+
+#golang
+export GOPATH=$HOME/Code/go
 
 #bindkey from pi314 github repo
 bindkey "\e[H" beginning-of-line
