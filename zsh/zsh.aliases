@@ -15,6 +15,12 @@ fi
 #generic aliases
 alias sc="screen"
 
+#my Linux
+if [ -d "/media/data/Dropbox/交大課程/" ];then
+    alias hw="cd /media/data/Dropbox/交大課程/"
+    alias db="cd /media/data/Dropbox/"
+fi
+
 #arch pacman alias
 if [[ -e /usr/bin/pacman ]]; then
     # Pacman alias examples
