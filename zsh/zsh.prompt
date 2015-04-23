@@ -12,14 +12,9 @@ b_blue="%{$fg_bold[blue]%}"
 b_cyan="%{$fg_bold[cyan]%}"
 b_green="%{$fg_bold[green]%}"
 b_white="%{$fg_bold[white]%}"
-b_gray="%{$fg_bold[white]%}"
+b_gray="%{$fg_bold[gray]%}"
 end="%{$reset_color%}"
 PROMPT="${b_white}%T-$end${b_cyan}%n${end}@${b_yellow}%m${b_green}[%~]${end}\
     $(git_super_status)
 ${b_white}>$end"
 
-function precmd {
-PROMPT="${b_white}%T-$end${b_cyan}%n${end}@${b_yellow}%m${b_green}[%~]${end}\
-    $(git_super_status)
-${b_white}>$end"
-}

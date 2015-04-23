@@ -9,6 +9,9 @@ fi
 if [[ -f $HOME/rc/zsh/zsh.aliases ]];then
     source $HOME/rc/zsh/zsh.aliases
 fi
+if [[ -f $HOME/rc/zsh/screen.plugin.zsh ]];then
+    source $HOME/rc/zsh/screen.plugin.zsh
+fi
 # The following lines were added by compinstall
 autoload -Uz compinit
 compinit
