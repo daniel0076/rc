@@ -21,6 +21,8 @@ zstyle ':completion:*' menu select=2 # if there is more than 2 options,auto sele
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle :compinstall filename '/home/daniel/.zshrc'
 
+
+
 # End of lines configured by zsh-newuser-install
 # End of lines added by compinstall
 
