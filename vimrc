@@ -19,10 +19,11 @@ set ambiwidth=single
 set expandtab
 " 定義tab 的空格數 (ts)
 set tabstop=4
-au FileType html,xml,css set tabstop=2
-au FileType html,xml,css set shiftwidth=2
 " 自動縮排所使用的空格數 (sw)
 set shiftwidth=4
+
+au FileType html,xml,css set tabstop=2
+au FileType html,xml,css set shiftwidth=2
 " 顯示行號
 " set nu == set number
 set nu
@@ -263,7 +264,6 @@ set tm=500
 
 au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 au FileType cpp set makeprg=g++\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType go  set makeprg=go\ run\ %
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -272,7 +272,7 @@ au FileType go  set makeprg=go\ run\ %
 "au   FileType   c        map   <F9>     :w<CR>:make && ./%:r.out<CR>
 "au   FileType   c        map   <F9>     :w<CR>:!gcr<CR>
 au   FileType   c,cpp     noremap   <F9>     :w<CR>:make && ./%:r.out<CR>
-au   FileType   go     noremap   <F8>   :w<CR>:make<CR>
+au   FileType   c,cpp     noremap   <F8>     :w<CR>:make<CR>
 au   FileType   python    noremap   <F9>     :w<CR>:!python3   %<CR>
 au   FileType   python    noremap   <F8>   :w<CR>:!python2   %<CR>
 au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>
@@ -319,9 +319,9 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "au FileType gdb set gdbprg=gdb\ --args
 
 " set gdb windows split in right side
-set splitright
+"set splitright
 " set gdb windows not split below
-set nosplitbelow
+"set nosplitbelow
 
 "let gdb_var_win = 0
 "function! GdbVar()
@@ -396,46 +396,40 @@ endif
 " You can disable or add new ones here:
 
 " Plugins from github repos:
+
+" Autocomplete
+Bundle 'Valloric/YouCompleteMe'
 "golang syntax
 "C/C++ complete
-Bundle 'Shougo/vimproc.vim'
-Bundle 'osyo-manga/vim-marching'
 "Python complete
 Bundle 'davidhalter/jedi-vim'
 " Python and PHP Debugger
 "Bundle 'fisadev/vim-debug.vim'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
-" Code commenter
+" Code commenter https://github.com/scrooloose/nerdcommenter
 Bundle 'scrooloose/nerdcommenter'
 " Class/module browser
 Bundle 'majutsushi/tagbar'
+" git wrapper
+Bundle 'tpope/vim-fugitive'
 " Zen coding
-Bundle 'mattn/emmet-vim'
-" Git integration
-Bundle 'motemen/git-vim'
-" Tab list panel
-"Bundle 'kien/tabman.vim'
+"Bundle 'mattn/emmet-vim'
 " Airline
 Bundle 'bling/vim-airline'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
-" Consoles as buffers
-Bundle 'rosenfeld/conque-term'
 " Pending tasks list
 Bundle 'fisadev/FixedTaskList.vim'
 " Surround
 "Bundle 'tpope/vim-surround'
 " Autoclose
 "Bundle 'Townk/vim-autoclose'
-" Indent text object
+" Indent text object vii to select same indent contents
 Bundle 'michaeljsmith/vim-indent-object'
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
-" Better autocompletion
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/neosnippet.vim'
-Bundle 'Shougo/neosnippet-snippets'
+
 "Snippets manager (SnipMate), dependencies, and snippets repo
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -443,8 +437,6 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'scrooloose/syntastic'
 " XML/HTML tags navigation
 Bundle 'matchit.zip'
-" Gvim colorscheme
-Bundle 'Wombat'
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -470,23 +462,10 @@ filetype indent on
 "https://github.com/fisadev/fisa-vim-config
 "plugins settings and mappings
 " Edit them as you wish.
-            " vim marching c/c++ complete{{{
-let g:marching_clang_command = "/usr/bin/clang"
-let g:marching#clang_command#options = {
-            \   "cpp" : "-std=c++11"
-            \}
-let g:marching_include_paths = filter(
-          \ split(glob('/usr/include/c++/*'), '\n') +
-          \ split(glob('/usr/include/*/c++/*'), '\n') +
-          \ split(glob('/usr/include/*/'), '\n'),
-          \ 'isdirectory(v:val)')
-let g:marching_enable_neocomplete = 1
-if !exists('g:neocomplete#force_omni_input_patterns')
-      let g:neocomplete#force_omni_input_patterns = {}
-  endif
-"let g:neocomplete#force_omni_input_patterns.cpp =
-"    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-set updatetime=200
+
+"YouCompleteMe{{{
+"This conf is important, read the docs
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "}}}
 "  Jedi-Python complete----------------{{{
 let g:jedi#popup_select_first = 0 "useless!
@@ -512,7 +491,7 @@ map <leader>j :call ToggleJedi()<cr>
 "fix jedi auto select the first candidate (popup_select_first=0 won't effect)
 "https://github.com/davidhalter/jedi-vim/issues/258
 let g:jedi#popup_on_dot=0 "dont let jedi call the complete
-let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+
 "add below in Neocomplete, let Neocomplete call the omnifunc and complete
 "autocmd FileType python setlocal omnifunc=jedi#completions
 
@@ -569,6 +548,7 @@ map <F2> :TaskList<CR>
 "               " Syntastic ------------------------------{{{
 
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
 function! ToggleLocationList()
 	if g:loaded_syntastic_loclist == 0
 		let g:loaded_syntastic_loclist = 1
@@ -585,7 +565,7 @@ map <leader>e :call ToggleLocationList()<cr>
 let g:syntastic_auto_loc_list = 2
 "nmap <leader>e :Errors<CR>
 " check also when just opened the file
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
 "               " custom icons (enable them if you use a patched font, and
@@ -595,110 +575,6 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
-"}}}
-"               " NeoComplete ------------------------------{{{
-"
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-q>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-s> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 0
-" Shell like behavior(not recommended).
-
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-set ofu=syntaxcomplete#Complete
-"按~自動補全(不用std::也可以用)
-"imap <silent> ` <C-X><C-O>
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"disable neocomplete for python(use jedi-vim instead)
-autocmd FileType python setlocal omnifunc=jedi#completions
-"autocmd FileType python NeoCompleteLock
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"遇到下面regex使用omnifunc,加上.*\w*則可啟動所有word都進行omnifunc
-"\|是條件分隔符號
-let g:neocomplete#sources#omni#input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*\|.*\w*'
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-"}}}
-"            " NeoSnippet-----------------------------{{{
-"
-"key-mappings.
-imap <C-b>     <Plug>(neosnippet_expand_or_jump)
-smap <C-b>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-b>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-"
 "}}}
 "" Airline ------------------------------{{{
 "themes
@@ -713,6 +589,7 @@ let g:airline_theme='wombat'
 "let g:airline_powerline_fonts = 0
 "let g:airline_theme = 'bubblegum'
 "let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline#extensions#tagbar#enabled = 1
@@ -736,3 +613,4 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "}}}
 "}}}
+"
