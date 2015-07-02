@@ -386,7 +386,7 @@ endif
 "}}}
 "插件及設定{{{
 "自定的vim套件
-"bundle setting{{{
+"installed Bundles{{{
 "
 "上面寫過了
 "Bundle 'gmarik/vundle'
@@ -401,8 +401,6 @@ endif
 Bundle 'Valloric/YouCompleteMe'
 "golang syntax
 "C/C++ complete
-"Python complete
-Bundle 'davidhalter/jedi-vim'
 " Python and PHP Debugger
 "Bundle 'fisadev/vim-debug.vim'
 " Better file browser
@@ -429,14 +427,12 @@ Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
+"git gutter
+Bundle 'airblade/vim-gitgutter'
 
-"Snippets manager (SnipMate), dependencies, and snippets repo
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
 " Python and other languages code checker
 Bundle 'scrooloose/syntastic'
 " XML/HTML tags navigation
-Bundle 'matchit.zip'
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -464,46 +460,22 @@ filetype indent on
 " Edit them as you wish.
 
 "YouCompleteMe{{{
+"convenient to use under default,for more options please see
+"https://github.com/Valloric/YouCompleteMe
 "This conf is important, read the docs
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"turn syntastic error location list <leader>e
+"let g:ycm_always_populate_location_list = 1
+let g:ycm_show_diagnostics_ui = 0
 "}}}
-"  Jedi-Python complete----------------{{{
-let g:jedi#popup_select_first = 0 "useless!
-let g:jedi#auto_initialization = 1
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = ""
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = ""
-let g:jedi#show_call_signatures = "1"
-
-function! ToggleJedi()
-	if  g:jedi#completions_enabled ==0
-		let g:jedi#completions_enabled = 1
-	elseif g:jedi#completions_enabled == 1
-		let g:jedi#completions_enabled = 0
-	endif
-endfunction
-map <leader>j :call ToggleJedi()<cr>
-
-"20140706
-"fix jedi auto select the first candidate (popup_select_first=0 won't effect)
-"https://github.com/davidhalter/jedi-vim/issues/258
-let g:jedi#popup_on_dot=0 "dont let jedi call the complete
-
-"add below in Neocomplete, let Neocomplete call the omnifunc and complete
-"autocmd FileType python setlocal omnifunc=jedi#completions
-
-"}}}
-" " Tagbar -----------------------------{{{
+"Tagbar -----------------------------{{{
 "
 " " toggle tagbar display
 map <F4> :TagbarToggle<CR>
 " " autofocus on tagbar open
 let g:tagbar_autofocus = 1
 "}}}
-" " NERDTree -----------------------------{{{
+"NERDTree -----------------------------{{{
 "
 " " toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
@@ -524,13 +496,13 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 "
 "
 "}}}
-" " Tasklist ------------------------------{{{
+"Tasklist ------------------------------{{{
 "
 " " show pending tasks list
 map <F2> :TaskList<CR>
 
 "}}}
-" " Vim-debug ------------------------------{{{
+" Vim-debug ------------------------------{{{
 "
 " " disable default mappings, have a lot of conflicts with oter plugins
 " let g:vim_debug_disable_mappings = 1
@@ -545,38 +517,35 @@ map <F2> :TaskList<CR>
 " map <F12> :Dbg up<CR>
 "
 "}}}
-"               " Syntastic ------------------------------{{{
-
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+" Syntastic ------------------------------{{{
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
 
 function! ToggleLocationList()
-	if g:loaded_syntastic_loclist == 0
-		let g:loaded_syntastic_loclist = 1
-		Error
-	elseif g:loaded_syntastic_loclist == 1
-		let g:loaded_syntastic_loclist = 0
-		lclose
-	endif
+    if g:loaded_syntastic_loclist == 0
+        let g:loaded_syntastic_loclist = 1
+        Error
+    elseif g:loaded_syntastic_loclist == 1
+        let g:loaded_syntastic_loclist = 0
+        lclose
+    endif
 endfunction
 
 map <leader>e :call ToggleLocationList()<cr>
 
+let g:syntastic_loc_list_height = 6
 " show list of errors and warnings on the current file
 let g:syntastic_auto_loc_list = 2
 "nmap <leader>e :Errors<CR>
 " check also when just opened the file
 let g:syntastic_check_on_open = 0
 " don't put icons on the sign column (it hides the vcs status icons of signify)
-let g:syntastic_enable_signs = 0
-"               " custom icons (enable them if you use a patched font, and
-"               enable the previous
-"               " setting)
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = '✗>'
+"let g:syntastic_warning_symbol = '>⚠'
 let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
+"let g:syntastic_style_warning_symbol = '>⚠'
 "}}}
-"" Airline ------------------------------{{{
+" Airline ------------------------------{{{
 "themes
 "let g:airline_theme="laederon"
 "let g:airline_theme='molokai'
