@@ -37,6 +37,15 @@ I like Syntastic more, please refer the doc for more information about YCM synta
 
 ## Change Log
 
+- 20150704
+    - fix [zsh-git-prompt](https://github.com/olivierverdier/zsh-git-prompt) display error when sceen is not activated
+    - modified prompt display
+    - add zsh-git-prompt to submodule
+    - move plugins to `~/rc/zsh/plugins`
+    - Plugins cloned from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+        - sudo
+        - screen
+
 - 20150702
     - Change auto-completion plugin to [YouCompleteMe](https://github.com/Valloric/YouCompleteMe),previously using [Neocomplete](https://github.com/Shougo/neocomplete.vim) but it significantly becomes slow when the code grows
     - Change git intergration to [vim-fugitive](https://github.com/tpope/vim-fugitive), which is more powerful, go to it's website for more information and tutorial

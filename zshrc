@@ -3,15 +3,15 @@
 if [[ -f $HOME/rc/zsh/zsh.env ]];then
     source $HOME/rc/zsh/zsh.env
 fi
-if [[ -f $HOME/rc/zsh/zsh.prompt ]];then
-    source $HOME/rc/zsh/zsh.prompt
-fi
 if [[ -f $HOME/rc/zsh/zsh.aliases ]];then
     source $HOME/rc/zsh/zsh.aliases
 fi
-if [[ -f $HOME/rc/zsh/screen.plugin.zsh ]];then
-    source $HOME/rc/zsh/screen.plugin.zsh
-fi
+
+#source all the plugins
+for files in $HOME/rc/zsh/plugins/*;do
+    source $files
+done
+
 # The following lines were added by compinstall
 autoload -Uz compinit
 compinit
@@ -43,3 +43,27 @@ bindkey "\eOH" beginning-of-line # for cygwin + mosh
 bindkey "\e[F" end-of-line
 bindkey "\e[4~" end-of-line # for screen
 bindkey "\eOF" end-of-line # for cygwin + mosh
+
+# color prompt
+#git status prompt
+
+if [ -f $HOME/rc/zsh/zsh-git-prompt/zshrc.sh ]; then
+    source $HOME/rc/zsh/zsh-git-prompt/zshrc.sh
+fi
+
+autoload -U colors
+colors
+b_yellow="%{$fg_bold[yellow]%}" #bold yellow
+b_blue="%{$fg_bold[blue]%}"
+b_cyan="%{$fg_bold[cyan]%}"
+b_green="%{$fg_bold[green]%}"
+b_white="%{$fg_bold[white]%}"
+b_gray="%{$fg_bold[gray]%}"
+end="%{$reset_color%}"
+
+function precmd()
+{
+PROMPT="${b_white}┌ %T - $end${b_cyan}%n${end}@${b_yellow}%m ${b_green}[%~]${end}     $(git_super_status)
+${b_white}└ >$end"
+}
+
