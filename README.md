@@ -37,6 +37,14 @@ I like Syntastic more, please refer the doc for more information about YCM synta
 
 ## Change Log
 
+- 20151105
+	- fix `link.sh` commented bug
+	- change vim color scheme to molokai
+	- add vim color file copy in `link.sh`
+	- fix vim and term color 256 problem
+	- new screen status bar
+	- new lscolor settings
+
 - 20150704
     - fix [zsh-git-prompt](https://github.com/olivierverdier/zsh-git-prompt) display error when sceen is not activated
     - modified prompt display

@@ -53,17 +53,18 @@ fi
 
 autoload -U colors
 colors
-b_yellow="%{$fg[yellow]%}" #bold yellow
-b_blue="%{$fg[blue]%}"
-b_cyan="%{$fg[cyan]%}"
-b_green="%{$fg[green]%}"
-b_white="%{$fg[white]%}"
-b_gray="%{$fg[gray]%}"
+b_yellow="%{$fg_bold[yellow]%}" #bold yellow
+b_blue="%{$fg_bold[blue]%}"
+b_cyan="%{$fg_bold[cyan]%}"
+b_green="%{$fg_bold[green]%}"
+b_white="%{$fg_bold[white]%}"
+b_gray="%{$fg_bold[gray]%}"
+b_magenta="%{$fg_bold[magenta]%}"
 end="%{$reset_color%}"
 
 function precmd()
 {
-PROMPT="${b_white}┌ %T - $end${b_cyan}%n${end}@${b_yellow}%m ${b_green}[%~]${end}     $(git_super_status)
+PROMPT="${b_white}┌ %T - $end${b_cyan}%n${end}@ ${b_yellow}%m ${b_green}[%~]${end}     $(git_super_status)
 ${b_white}└ >$end"
 }
 
