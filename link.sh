@@ -1,6 +1,7 @@
 #!/bin/sh
 files=`env ls|grep -v "\."`
 dir=`env pwd`
+echo "linking rc files into $HOME"
 for f in $files;do
     if [ -L $HOME/.${f} ];then
         rm $HOME/.${f}
@@ -10,6 +11,12 @@ for f in $files;do
         echo ".$f linked"
     fi
 done
+
+echo "copying vim solarized color scheme"
+if [ !-d $HOME/.vim/colors ];then
+	mkdir $HOME/.vim/colors
+	cp ./colors/solarized.vim $HOME/.vim/colors/
+fi
 
 echo "initiating submodules"
 cd "./zsh/zsh-git-prompt"

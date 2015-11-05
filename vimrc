@@ -15,8 +15,8 @@ set scrolloff=4
 syntax on
 "airline的status bar正常運作，用來設定亞洲字形用幾格來顯示
 set ambiwidth=single
-" 用空白來當作tab (et)
-set expandtab
+"  不用空白來當作tab (et)
+set noexpandtab
 " 定義tab 的空格數 (ts)
 set tabstop=4
 " 自動縮排所使用的空格數 (sw)
@@ -90,12 +90,15 @@ cmap w!! w !sudo tee %
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable 256 colors in vim (this must put before setting the colorscheme)
 set t_Co=256
+let g:solarized_termcolors=256
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "background color (put behind colorscheme)
 set bg=dark
 "set bg=light
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"color scheme
+colorscheme solarized
 "}}}
 "其它設定{{{
 "tabline settin in .vim/plugin/tabline.vim
@@ -415,8 +418,6 @@ Bundle 'tpope/vim-fugitive'
 "Bundle 'mattn/emmet-vim'
 " Airline
 Bundle 'bling/vim-airline'
-" Terminal Vim with 256 colors colorscheme
-Bundle 'fisadev/fisa-vim-colorscheme'
 " Pending tasks list
 Bundle 'fisadev/FixedTaskList.vim'
 " Surround
@@ -432,7 +433,6 @@ Bundle 'airblade/vim-gitgutter'
 
 " Python and other languages code checker
 Bundle 'scrooloose/syntastic'
-" XML/HTML tags navigation
 
 " ============================================================================
 " Install plugins the first time vim runs
