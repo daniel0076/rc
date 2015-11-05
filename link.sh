@@ -13,7 +13,7 @@ for f in $files;do
 done
 
 echo "copying vim solarized color scheme"
-if [ !-d $HOME/.vim/colors ];then
+if [ ! -d $HOME/.vim/colors ];then
 	mkdir $HOME/.vim/colors
 	cp ./colors/solarized.vim $HOME/.vim/colors/
 fi
