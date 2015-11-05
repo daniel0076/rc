@@ -90,8 +90,8 @@ cmap w!! w !sudo tee %
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable 256 colors in vim (this must put before setting the colorscheme)
 set term=xterm-256color
+let g:rehash256 = 1
 set t_Co=256
-let g:solarized_termcolors=256
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "background color (put behind colorscheme)
@@ -99,7 +99,7 @@ set bg=dark
 "set bg=light
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "color scheme
-colorscheme solarized
+colorscheme molokai
 "}}}
 "其它設定{{{
 "tabline settin in .vim/plugin/tabline.vim
