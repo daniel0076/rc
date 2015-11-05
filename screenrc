@@ -6,6 +6,9 @@
 # 關閉啟動訊息。
 startup_message off
 
+#scroll buffer
+defscrollback 10000
+
 # Caption
 caption always "%{YK}%-w%<%{=B GK}%n %t%{= KY}%+w"
 #caption always "%{=u .r} %-w%<%{=ub .Y}%n %t%{=u .r}%+w "
@@ -24,8 +27,6 @@ hardstatus alwayslastline "%{=b BW} {%l} %{WK}%44=%{=B WK}$USER%{=B WK }@%H %=%{
 # hardstatus alwayslastline " %-Lw%{= Bw}%n%f %t%{-}%+Lw %=| %0c:%s "
 
 # 編碼切換
-bind b encoding big5 utf8
-bind u encoding utf8 utf8
 defencoding utf8
 
 bindkey "^[n" screen # F9 : 新增子視窗。(C-a c)
