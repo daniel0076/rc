@@ -10,7 +10,7 @@ startup_message off
 defscrollback 10000
 
 # Caption
-caption always "%{YK}%-w%<%{=B GK}%n %t%{= KY}%+w"
+caption always "%{yk}%-w%<%{=b gk}%n %t%{= ky}%+w"
 #caption always "%{=u .r} %-w%<%{=ub .Y}%n %t%{=u .r}%+w "
 #caption always "%{=u .G} %-w%<%{=ub .y}%n %t%{=u .G}%+w "
 #caption always "%{bw} %M/%d %D %C%A %{wb} %-w%{y}%n %t%{w}%+w%{k}"
@@ -19,7 +19,7 @@ caption always "%{YK}%-w%<%{=B GK}%n %t%{= KY}%+w"
 # hardstatus alwaysignore
 # hardstatus alwayslastline "%{= .K} [%l]%<%=%{= .Y}$USER%{= .R}@%H %=%{= .m} %Y/%m/%d%{= .M} %0c "
 #for mac only
-hardstatus alwayslastline "%{=b BW} {%l} %{WK}%44=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
+hardstatus alwayslastline "%{=b bw} {%l} %{wk}%44=%{=b wk}$USER%{=b wk }@%H %=%{= yk}  %Y/%m/%d  %{= bw} %0c "
 #for linux or other
 # hardstatus alwayslastline "%{=b BW} {%l} %{WK}%=%{=B WK}$USER%{=B WK }@%H %=%{= YK}  %Y/%m/%d  %{= BW} %0c "
 # hardstatus alwayslastline "%{=b BW} {%l}%018=%{=B WK} %H %-30= %{YK} %Y/%m/%d(%D) %{BW} %C %A"

@@ -53,12 +53,12 @@ fi
 
 autoload -U colors
 colors
-b_yellow="%{$fg_bold[yellow]%}" #bold yellow
-b_blue="%{$fg_bold[blue]%}"
-b_cyan="%{$fg_bold[cyan]%}"
-b_green="%{$fg_bold[green]%}"
-b_white="%{$fg_bold[white]%}"
-b_gray="%{$fg_bold[gray]%}"
+b_yellow="%{$fg[yellow]%}" #bold yellow
+b_blue="%{$fg[blue]%}"
+b_cyan="%{$fg[cyan]%}"
+b_green="%{$fg[green]%}"
+b_white="%{$fg[white]%}"
+b_gray="%{$fg[gray]%}"
 end="%{$reset_color%}"
 
 function precmd()
