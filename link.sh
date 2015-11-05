@@ -12,11 +12,12 @@ for f in $files;do
     fi
 done
 
-echo "copying vim molokai color scheme"
+
 if [ ! -d $HOME/.vim/colors ];then
 	mkdir $HOME/.vim/colors
-	cp ./colors/molokai.vim $HOME/.vim/colors/
 fi
+echo "copying vim molokai color scheme"
+cp ./colors/molokai.vim $HOME/.vim/colors/
 
 echo "initiating submodules"
 cd "./zsh/zsh-git-prompt"
