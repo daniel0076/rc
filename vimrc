@@ -15,15 +15,18 @@ set scrolloff=4
 syntax on
 "airline的status bar正常運作，用來設定亞洲字形用幾格來顯示
 set ambiwidth=single
-"  不用空白來當作tab (et)
-set noexpandtab
 " 定義tab 的空格數 (ts)
 set tabstop=4
 " 自動縮排所使用的空格數 (sw)
 set shiftwidth=4
+"  不用空白來當作tab (et)
+set noexpandtab
 
-au FileType html,xml,css set tabstop=2
-au FileType html,xml,css set shiftwidth=2
+
+au FileType djangohtml,html,xml,css set tabstop=2
+au FileType djangohtml,html,xml,css set shiftwidth=2
+au FileType python set tabstop=4
+au FileType python set noexpandtab
 " 顯示行號
 " set nu == set number
 set nu
@@ -48,6 +51,8 @@ set bs=2
 " 游標線
 " set cul == set cursorline
 set cursorline
+set cursorcolumn
+
 "hi CursorLine term=none cterm=none ctermbg=none ctermbg=none
 "au InsertEnter * hi CursorLine term=none cterm=underline
 "au InsertLeave * hi CursorLine term=none cterm=none ctermbg=none
@@ -267,7 +272,7 @@ set tm=500
 "cmap !clang+r   !clang++ && ./%:r.out
 
 au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType cpp set makeprg=g++\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType cpp set makeprg=g++\ -std=c++11\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -276,7 +281,7 @@ au FileType cpp set makeprg=g++\ -std=c++11\ -g\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 "au   FileType   c        map   <F9>     :w<CR>:make && ./%:r.out<CR>
 "au   FileType   c        map   <F9>     :w<CR>:!gcr<CR>
 au   FileType   c,cpp     noremap   <F9>     :w<CR>:make && ./%:r.out<CR>
-au   FileType   c,cpp     noremap   <F8>     :w<CR>:make<CR>
+au   FileType   c,cpp     noremap   <F8>     :w<CR>:make
 au   FileType   python    noremap   <F9>     :w<CR>:!python3   %<CR>
 au   FileType   python    noremap   <F8>   :w<CR>:!python2   %<CR>
 au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>
@@ -403,6 +408,8 @@ endif
 
 " Autocomplete
 Bundle 'Valloric/YouCompleteMe'
+"html tag matching
+Bundle 'Valloric/MatchTagAlways'
 "golang syntax
 "C/C++ complete
 " Python and PHP Debugger
@@ -459,7 +466,9 @@ filetype indent on
 "https://github.com/fisadev/fisa-vim-config
 "plugins settings and mappings
 " Edit them as you wish.
-
+"MatchTagAlways{{{
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
+"}}}
 "YouCompleteMe{{{
 "convenient to use under default,for more options please see
 "https://github.com/Valloric/YouCompleteMe
@@ -468,6 +477,11 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 "turn syntastic error location list <leader>e
 "let g:ycm_always_populate_location_list = 1
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
 "}}}
 "Tagbar -----------------------------{{{
 "

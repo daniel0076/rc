@@ -9,6 +9,9 @@ startup_message off
 #scroll buffer
 defscrollback 10000
 
+#term color
+term xterm-256color
+
 # Caption
 #caption always "%{yk}%-w%<%{=b gk}%n %t%{= ky}%+w"
 #caption always "%{=u .r} %-w%<%{=ub .Y}%n %t%{=u .r}%+w "
@@ -34,3 +37,12 @@ bindkey "^[n" screen # F9 : 新增子視窗。(C-a c)
 bindkey "^[m" kill   # F10 : 關閉當前視窗。 (C-a k)
 bindkey "^[." next   #alt+> next
 bindkey "^[," prev   #alt+< prev
+
+# - Alt + o : 垂直分割當前視窗。 (C-a |)
+bindkey "^[o" split -v
+
+# - Alt + q : 關閉當前分割區。 (C-a X)
+bindkey "^[q" remove
+
+# - Alt + w : 切換當前分割區。 (C-a tab)
+bindkey "^[w" focus
