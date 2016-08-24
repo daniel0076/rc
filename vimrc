@@ -20,13 +20,12 @@ set tabstop=4
 " 自動縮排所使用的空格數 (sw)
 set shiftwidth=4
 "  不用空白來當作tab (et)
-set noexpandtab
+set expandtab
 
 
-au FileType djangohtml,html,xml,css set tabstop=2
-au FileType djangohtml,html,xml,css set shiftwidth=2
+au FileType htmldjango,html,xml,css set tabstop=2
+au FileType htmldjango,html,xml,css set shiftwidth=2
 au FileType python set tabstop=4
-au FileType python set noexpandtab
 " 顯示行號
 " set nu == set number
 set nu
@@ -410,6 +409,10 @@ endif
 Bundle 'Valloric/YouCompleteMe'
 "html tag matching
 Bundle 'Valloric/MatchTagAlways'
+"python-mode
+Bundle 'klen/python-mode'
+"jedi-vim
+Bundle 'davidhalter/jedi-vim'
 "golang syntax
 "C/C++ complete
 " Python and PHP Debugger
@@ -595,6 +598,11 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+"}}}
+"pymode{{{
+    let g:pymode_lint_checkers = ['pep8',]
+    let g:pymode_lint_ignore = "E501,W"
+    let g:pymode_lint_cwindow = 0
 "}}}
 "}}}
 "
