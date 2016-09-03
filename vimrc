@@ -603,6 +603,9 @@ let g:airline_symbols.whitespace = 'Ξ'
     let g:pymode_lint_checkers = ['pep8',]
     let g:pymode_lint_ignore = "E501,W"
     let g:pymode_lint_cwindow = 0
+   " }}}
+" jedi vim{{{
+    let g:jedi#popup_select_first = 0
 "}}}
 "}}}
 "
