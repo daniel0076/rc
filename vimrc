@@ -22,6 +22,8 @@ set shiftwidth=4
 "  不用空白來當作tab (et)
 set expandtab
 
+" File encoding for rare encodings
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
 au FileType htmldjango,html,xml,css set tabstop=2
 au FileType htmldjango,html,xml,css set shiftwidth=2
@@ -412,7 +414,7 @@ Bundle 'Valloric/MatchTagAlways'
 "python-mode
 Bundle 'klen/python-mode'
 "jedi-vim
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
 "golang syntax
 "C/C++ complete
 " Python and PHP Debugger
@@ -473,6 +475,8 @@ filetype indent on
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
 "}}}
 "YouCompleteMe{{{
+" turn off preview buffer
+autocmd CompleteDone * pclose
 "convenient to use under default,for more options please see
 "https://github.com/Valloric/YouCompleteMe
 "This conf is important, read the docs
@@ -485,6 +489,7 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 "}}}
 "Tagbar -----------------------------{{{
 "
@@ -565,16 +570,7 @@ let g:syntastic_style_error_symbol = '✗'
 "}}}
 " Airline ------------------------------{{{
 "themes
-"let g:airline_theme="laederon"
-"let g:airline_theme='molokai'
-let g:airline_theme='wombat'
-"let g:airline_theme='luna'
-"let g:airline_theme='solarized'
-"let g:airline_theme='badwolf'
-"let g:airline_theme='simple'
-"
 "let g:airline_powerline_fonts = 0
-"let g:airline_theme = 'bubblegum'
 "let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_modified=1
@@ -600,12 +596,15 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "}}}
 "pymode{{{
-    let g:pymode_lint_checkers = ['pep8',]
-    let g:pymode_lint_ignore = "E501,W"
-    let g:pymode_lint_cwindow = 0
+let g:pymode_lint_checkers = ['pep8',]
+let g:pymode_lint_ignore = "E501,W"
+let g:pymode_lint_cwindow = 0
+" if you have large project in same dir, this can make rope faster
+let g:pymode_rope_autoimport = 0
+let g:pymode_rope_lookup_project = 0
    " }}}
 " jedi vim{{{
-    let g:jedi#popup_select_first = 0
+let g:jedi#popup_select_first = 0
 "}}}
 "}}}
 "
