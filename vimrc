@@ -5,6 +5,10 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 " autocompletion of files and commands behaves like shell
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
+
+" turn off complete preview buffer after complete
+autocmd CompleteDone * pclose
+
 " set filetype on
 filetype plugin indent on
 
@@ -28,6 +32,7 @@ set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 au FileType htmldjango,html,xml,css set tabstop=2
 au FileType htmldjango,html,xml,css set shiftwidth=2
 au FileType python set tabstop=4
+
 " 顯示行號
 " set nu == set number
 set nu
@@ -413,8 +418,6 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
 "python-mode
 Bundle 'klen/python-mode'
-"jedi-vim
-"Bundle 'davidhalter/jedi-vim'
 "golang syntax
 "C/C++ complete
 " Python and PHP Debugger
@@ -439,11 +442,8 @@ Bundle 'fisadev/FixedTaskList.vim'
 "Bundle 'Townk/vim-autoclose'
 " Indent text object vii to select same indent contents
 Bundle 'michaeljsmith/vim-indent-object'
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
-" operators, highlighting, run and ipdb breakpoints)
 "git gutter
 Bundle 'airblade/vim-gitgutter'
-
 " Python and other languages code checker
 Bundle 'scrooloose/syntastic'
 
@@ -475,8 +475,7 @@ filetype indent on
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
 "}}}
 "YouCompleteMe{{{
-" turn off preview buffer
-autocmd CompleteDone * pclose
+
 "convenient to use under default,for more options please see
 "https://github.com/Valloric/YouCompleteMe
 "This conf is important, read the docs
@@ -489,7 +488,7 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_server_python_interpreter = system('env python3')
 "}}}
 "Tagbar -----------------------------{{{
 "
@@ -603,8 +602,5 @@ let g:pymode_lint_cwindow = 0
 let g:pymode_rope_autoimport = 0
 let g:pymode_rope_lookup_project = 0
    " }}}
-" jedi vim{{{
-let g:jedi#popup_select_first = 0
-"}}}
 "}}}
 "
