@@ -38,11 +38,14 @@ bindkey "^[m" kill   # F10 : 關閉當前視窗。 (C-a k)
 bindkey "^[." next   #alt+> next
 bindkey "^[," prev   #alt+< prev
 
-# - Alt + o : 垂直分割當前視窗。 (C-a |)
-bindkey "^[o" split -v
+# - Alt + s : 垂直分割當前視窗。 (C-a |)
+bindkey "^[s" split -v
 
 # - Alt + q : 關閉當前分割區。 (C-a X)
 bindkey "^[q" remove
 
 # - Alt + w : 切換當前分割區。 (C-a tab)
 bindkey "^[w" focus
+
+# Enable mouse scroll in screen
+termcapinfo xterm* ti@:te@
