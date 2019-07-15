@@ -14,7 +14,7 @@ done
 
 
 if [ ! -d $HOME/.vim/colors ];then
-	mkdir $HOME/.vim/colors
+	mkdir -p $HOME/.vim/colors
 fi
 echo "copying vim molokai color scheme"
 cp ./colors/molokai.vim $HOME/.vim/colors/
