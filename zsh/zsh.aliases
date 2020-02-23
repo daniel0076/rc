@@ -17,6 +17,7 @@ bindkey '^[[A' up-line-or-search #type vim in shell and press up
 bindkey '^[[B' down-line-or-search
 #generic aliases
 alias sc="screen"
+alias ptt="ssh bbsu@ptt.cc"
 
 #my Linux
 if [ -d "/media/data/Dropbox/交大課程/" ];then
