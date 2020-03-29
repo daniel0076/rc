@@ -44,8 +44,6 @@ bindkey "\e[F" end-of-line
 bindkey "\e[4~" end-of-line # for screen
 bindkey "\eOF" end-of-line # for cygwin + mosh
 
-bindkey "\e[3~" delete-char # for mac
-
 # color prompt
 #git status prompt
 
