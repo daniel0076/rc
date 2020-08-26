@@ -2,9 +2,8 @@
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 "}}}
 " 一般設定{{{
-" autocompletion of files and commands behaves like shell
-" (complete only the common part, list the options that match)
-set wildmode=list:longest
+
+:set runtimepath+=~/.vimstyles
 
 " turn off complete preview buffer after complete
 autocmd CompleteDone * pclose
@@ -98,31 +97,6 @@ set showcmd
 cmap w!! w !sudo tee %
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" enable 256 colors in vim (this must put before setting the colorscheme)
-"set term=xterm-256color
-"let g:rehash256 = 1
-"set t_Co=256
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"background color (put behind colorscheme)
-"set bg=dark
-"set bg=light
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme
-" Important!!
-if has('termguicolors')
-  set termguicolors
-endif
-"
-" The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
-
-colorscheme sonokai
-
-
 "}}}
 "其它設定{{{
 "tabline settin in .vim/plugin/tabline.vim
@@ -157,14 +131,6 @@ set foldlevel=99
 set list
 "讓tab顯示成 >- 而行尾多餘的空白顯示成 -
 set listchars=tab:>-,trail:~
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"quickly shift that line UP or DOWN
-"noremap <leader>j :m+<ENTER>
-"noremap <leader>k :m-2<ENTER>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"在insert mode 時，一鍵插入時間戳記
-"imap <leader>t <C-R>=strftime("%c")<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
 "熱鍵設定{{{
 "map儲存
@@ -374,100 +340,53 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
-" Setting up Vundle - the vim plugin bundler {{{
-" 這裡包含自動安裝Vundle
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let iCanHazVundle=0
+" Setting up vim-plug - the vim plugin manager{{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
-" Setting up Vundle - the vim plugin bundler end
-
-" Brief help
-" :BundleList - list configured bundles
-" :BundleInstall(!) - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!) - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
 "插件及設定{{{
 "自定的vim套件
-"installed Bundles{{{
+"installed Plugins{{{
 "
-"上面寫過了
-"Bundle 'gmarik/vundle'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" ============================================================================
-" Active plugins
-" You can disable or add new ones here:
+" Make sure you use single quotes
 
-" Plugins from github repos:
-
-" Autocomplete
-Plugin 'Valloric/YouCompleteMe'
-" TabNine based on YCM
-Plugin 'zxqfl/tabnine-vim'
 " Better file browser
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Code commenter https://github.com/scrooloose/nerdcommenter
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " Class/module browser
-Plugin 'majutsushi/tagbar'
-" git wrapper
-Plugin 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
 " Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Pending tasks list
-Plugin 'fisadev/FixedTaskList.vim'
+Plug 'fisadev/FixedTaskList.vim'
 " Indent text object vii to select same indent contents
-Plugin 'michaeljsmith/vim-indent-object'
-"git gutter
-Plugin 'airblade/vim-gitgutter'
+Plug 'michaeljsmith/vim-indent-object'
+"git related
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 " Python and other languages code checker
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " ColorScheme
-Plugin 'sainnhe/sonokai'
-Plugin 'sheerun/vim-polyglot'
+Plug 'sainnhe/sonokai'
+Plug 'sheerun/vim-polyglot'
+" Autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" install needed language supports
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 
+" Initialize plugin system
+call plug#end()
 
-" ============================================================================
-" Install plugins the first time vim runs
-
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
-
-" ============================================================================
-" Vim settings and mappings
-" You can edit them as you wish
-
-" allow plugins by file type (required for plugins!)
-filetype plugin on
-filetype indent on
 
 "}}}
 "plugin settings{{{
@@ -476,25 +395,16 @@ filetype indent on
 "https://github.com/fisadev/fisa-vim-config
 "plugins settings and mappings
 " Edit them as you wish.
-"MatchTagAlways{{{
-nnoremap <leader>% :MtaJumpToOtherTag<cr>
-"}}}
-"YouCompleteMe{{{
+" coc.nvim{{{
+" https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-the-completion-experience
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-"convenient to use under default,for more options please see
-"https://github.com/Valloric/YouCompleteMe
-"This conf is important, read the docs
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-"turn syntastic error location list <leader>e
-"let g:ycm_always_populate_location_list = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-let g:ycm_server_python_interpreter = system('env python3')
-"}}}
+" }}}
 "Tagbar -----------------------------{{{
 "
 " " toggle tagbar display
@@ -606,6 +516,22 @@ let g:pymode_lint_cwindow = 0
 " if you have large project in same dir, this can make rope faster
 let g:pymode_rope_autoimport = 0
 let g:pymode_rope_lookup_project = 0
-   " }}}
-"}}}
+" }}}
+"colorscheme: Sonokai{{{
+" Put the color scheme install by vim-plug here so it can be automatically
+" activate
+" Important!!
+if has('termguicolors')
+    set termguicolors
+endif
 "
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
+
+
+"}}}
+"}}}
