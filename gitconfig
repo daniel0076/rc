@@ -5,6 +5,7 @@
 [user]
 	name = Daniel Tsai
 	email = idaniel.twc@gmail.com
+	signingkey = A02CCE19
 [alias]
 	lg = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	co = commit
