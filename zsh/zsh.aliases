@@ -16,14 +16,8 @@ fi
 bindkey '^[[A' up-line-or-search #type vim in shell and press up
 bindkey '^[[B' down-line-or-search
 #generic aliases
-alias sc="screen"
 alias ptt="ssh bbsu@ptt.cc"
-
-#my Linux
-if [ -d "/media/data/Dropbox/交大課程/" ];then
-    alias hw="cd /media/data/Dropbox/交大課程/"
-    alias db="cd /media/data/Dropbox/"
-fi
+alias tm="tmux"
 
 #arch pacman alias
 if [[ -e /usr/bin/pacman ]]; then

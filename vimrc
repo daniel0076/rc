@@ -100,17 +100,29 @@ cmap w!! w !sudo tee %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable 256 colors in vim (this must put before setting the colorscheme)
-set term=xterm-256color
-let g:rehash256 = 1
-set t_Co=256
+"set term=xterm-256color
+"let g:rehash256 = 1
+"set t_Co=256
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "background color (put behind colorscheme)
-set bg=dark
+"set bg=dark
 "set bg=light
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"color scheme
-colorscheme molokai
+"colorscheme
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+"
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
+
+
 "}}}
 "其它設定{{{
 "tabline settin in .vim/plugin/tabline.vim
@@ -413,39 +425,32 @@ endif
 " Plugins from github repos:
 
 " Autocomplete
-Bundle 'Valloric/YouCompleteMe'
-"html tag matching
-Bundle 'Valloric/MatchTagAlways'
-"python-mode
-Bundle 'klen/python-mode'
-"golang syntax
-"C/C++ complete
-" Python and PHP Debugger
-"Bundle 'fisadev/vim-debug.vim'
+Plugin 'Valloric/YouCompleteMe'
+" TabNine based on YCM
+Plugin 'zxqfl/tabnine-vim'
 " Better file browser
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " Code commenter https://github.com/scrooloose/nerdcommenter
-Bundle 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 " Class/module browser
-Bundle 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 " git wrapper
-Bundle 'tpope/vim-fugitive'
-" Zen coding
-"Bundle 'mattn/emmet-vim'
+Plugin 'tpope/vim-fugitive'
 " Airline
-Bundle 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Pending tasks list
-Bundle 'fisadev/FixedTaskList.vim'
-" Surround
-"Bundle 'tpope/vim-surround'
-" Autoclose
-"Bundle 'Townk/vim-autoclose'
+Plugin 'fisadev/FixedTaskList.vim'
 " Indent text object vii to select same indent contents
-Bundle 'michaeljsmith/vim-indent-object'
+Plugin 'michaeljsmith/vim-indent-object'
 "git gutter
-Bundle 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 " Python and other languages code checker
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
+" ColorScheme
+Plugin 'sainnhe/sonokai'
+Plugin 'sheerun/vim-polyglot'
+
 
 " ============================================================================
 " Install plugins the first time vim runs

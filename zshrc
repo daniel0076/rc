@@ -53,6 +53,8 @@ if [ -f $HOME/rc/zsh/zsh-git-prompt/zshrc.sh ]; then
     source $HOME/rc/zsh/zsh-git-prompt/zshrc.sh
 fi
 
+bindkey "^[[3~" delete-char
+
 autoload -U colors
 colors
 b_yellow="%{$fg_bold[yellow]%}" #bold yellow
