@@ -27,8 +27,8 @@ set expandtab
 " File encoding for rare encodings
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
-au FileType htmldjango,html,xml,css set tabstop=2
-au FileType htmldjango,html,xml,css set shiftwidth=2
+au FileType htmldjango,html,xml,css,ts set tabstop=2
+au FileType htmldjango,html,xml,css,ts set shiftwidth=2
 au FileType python set tabstop=4
 
 " 顯示行號
