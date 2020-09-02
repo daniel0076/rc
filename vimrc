@@ -3,10 +3,9 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 "}}}
 " 一般設定{{{
 
-:set runtimepath+=~/.vimstyles
+set runtimepath+=~/.vimstyles
 
-" turn off complete preview buffer after complete
-autocmd CompleteDone * pclose
+set tags=./tags,./TAGS,tags;~,TAGS;~
 
 " set filetype on
 filetype plugin indent on
@@ -375,7 +374,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Python and other languages code checker
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 " ColorScheme
 Plug 'sainnhe/sonokai'
 Plug 'sheerun/vim-polyglot'
@@ -455,6 +454,8 @@ map <F2> :TaskList<CR>
 "
 "}}}
 " Syntastic ------------------------------{{{
+let g:syntastic_cpp_config_file = '.syntastic_include_config'
+let g:syntastic_c_config_file = '.syntastic_include_config'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
 
 function! ToggleLocationList()
@@ -478,9 +479,9 @@ let g:syntastic_check_on_open = 0
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = '✗>'
-"let g:syntastic_warning_symbol = '>⚠'
+let g:syntastic_warning_symbol = '>⚠'
 let g:syntastic_style_error_symbol = '✗'
-"let g:syntastic_style_warning_symbol = '>⚠'
+let g:syntastic_style_warning_symbol = '>⚠'
 "}}}
 " Airline ------------------------------{{{
 "themes
@@ -534,4 +535,7 @@ colorscheme sonokai
 
 
 "}}}
+" fzf {{{
+set rtp+=/opt/local/share/fzf/vim
+" }}}
 "}}}
