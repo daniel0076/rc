@@ -1,5 +1,6 @@
 #!/bin/sh
 files=`env ls|grep -v "\."`
+files="${files} tmux.conf"
 dir=`env pwd`
 echo "linking rc files into $HOME"
 for f in $files;do
