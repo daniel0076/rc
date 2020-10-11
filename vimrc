@@ -185,6 +185,10 @@ set wildignore+=*.git*,*.hg*,*.svn* " version control system
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自動移除每行最後多餘的空白
 autocmd BufWritePre * :%s/\s\+$//e
+
+" 按 = 自動 format
+autocmd FileType c,cpp,objc nnoremap <buffer>= :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer>= :ClangFormat<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " quick open vimrc in a new tab
 nmap <leader>v :tabe ~/.vimrc<CR>
@@ -382,6 +386,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " install needed language supports
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+
+" C/C++ format
+Plug 'rhysd/vim-clang-format'
 
 " Initialize plugin system
 call plug#end()
