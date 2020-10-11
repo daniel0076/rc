@@ -359,7 +359,6 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
 
 " Better file browser
 Plug 'scrooloose/nerdtree'
@@ -386,7 +385,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " install needed language supports
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-
 " C/C++ format
 Plug 'rhysd/vim-clang-format'
 
@@ -426,6 +424,9 @@ map <F3> :NERDTreeToggle<CR>
 nmap ,t :NERDTreeFind<CR>
 " " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" close the nerdtree after file open
+let NERDTreeQuitOnOpen=1
+
 "-------按鍵說明
 "
 ":NERDTree 開啟
@@ -544,5 +545,9 @@ colorscheme sonokai
 "}}}
 " fzf {{{
 set rtp+=/opt/local/share/fzf/vim
+" }}}
+" cscope{{{
+cs add ./cscope.out
+
 " }}}
 "}}}
