@@ -1,6 +1,3 @@
-"{{{let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-"}}}
 " 一般設定{{{
 
 set runtimepath+=~/.vimstyles
@@ -95,6 +92,13 @@ set showcmd
 "設定 w!!，當忘記用sudo 編輯時用w!! 儲存
 cmap w!! w !sudo tee %
 
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    " https://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging/15095377#15095377
+    set t_ut=
+endif
 
 "}}}
 "其它設定{{{
@@ -538,6 +542,7 @@ endif
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
+let g:sonokai_transparent_background = 0
 
 colorscheme sonokai
 
