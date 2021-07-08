@@ -165,10 +165,18 @@ map <leader>p :call PasteSwitch()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "對視窗切換做map
 
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nmap th <C-w>h
+nmap tj <C-w>j
+nmap tk <C-w>k
+nmap tl <C-w>l
+
+nmap t\ :vsplit<CR>
+nmap t- :split<CR>
+" resize splited windows
+nmap <C-h> <C-w>5<
+nmap <C-j> <C-w>5-
+nmap <C-k> <C-w>5+
+nmap <C-l> <C-w>5>
 
 "設定換tab
 nmap tp :tabprevious<CR>
@@ -468,7 +476,7 @@ map <F2> :TaskList<CR>
 " Syntastic ------------------------------{{{
 let g:syntastic_cpp_config_file = '.syntastic_include_config'
 let g:syntastic_c_config_file = '.syntastic_include_config'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
 
 function! ToggleLocationList()
     if g:loaded_syntastic_loclist == 0
