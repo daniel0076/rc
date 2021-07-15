@@ -1,4 +1,5 @@
 #!/bin/sh
+
 files=`env ls|grep -v "\."`
 files="${files} tmux.conf"
 dir=`env pwd`
@@ -13,14 +14,16 @@ for f in $files;do
     fi
 done
 
-
-if [ ! -d $HOME/.vim/colors ];then
-	mkdir -p $HOME/.vim/colors
-fi
-echo "copying vim molokai color scheme"
-cp ./colors/molokai.vim $HOME/.vim/colors/
-
 echo "initiating submodules"
 cd "./zsh/zsh-git-prompt"
 git submodule init
 git submodule update
+
+if [ ! -d "$HOME/.oh-my-zsh/" ]
+then
+    echo "installing oh-my-zsh at home"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+echo "linking my custom theme"
+ln -s $dir/zsh/mytheme.zsh-theme $HOME/.oh-my-zsh/themes/
