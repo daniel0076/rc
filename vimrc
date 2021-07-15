@@ -1,15 +1,9 @@
 " 一般設定{{{
-
-set runtimepath+=~/.vimstyles
-
-set tags=./tags,./TAGS,tags;~,TAGS;~
-
 " set filetype on
 filetype plugin indent on
 
 " when scrolling, keep cursor 4 lines away from screen border
 set scrolloff=4
-
 " 開啟關鍵字上色功能
 syntax on
 "airline的status bar正常運作，用來設定亞洲字形用幾格來顯示
@@ -23,11 +17,6 @@ set expandtab
 
 " File encoding for rare encodings
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
-
-au FileType htmldjango,html,xml,css,ts set tabstop=2
-au FileType htmldjango,html,xml,css,ts set shiftwidth=2
-au FileType python set tabstop=4
-
 " 顯示行號
 " set nu == set number
 set nu
@@ -38,8 +27,6 @@ set noshowmode
 " 尋找時，符合字串會反白表示
 set hlsearch
 "search 字串時不分大小寫
-"set ignorecase == set ic
-"set noignorecase == set noic
 set ignorecase
 
 "即時搜尋
@@ -50,45 +37,22 @@ set is
 set bs=2
 
 " 游標線
-" set cul == set cursorline
 set cursorline
 set cursorcolumn
-
-"hi CursorLine term=none cterm=none ctermbg=none ctermbg=none
-"au InsertEnter * hi CursorLine term=none cterm=underline
-"au InsertLeave * hi CursorLine term=none cterm=none ctermbg=none
-
 " 不和舊式語法相容(相容會仿舊 vi 的 bug)
 set nocompatible
-
 "狀態列
 set laststatus=2
-
-"游標留底
-"set scrolloff=5
-
-" Ctrl + N 自動補完會列出待選清單
-set showmatch
-
 " vim 裡打指令，按tab 會列出待選列表
 set wildmenu
-
-"依文件類型設置自動縮排
-"filetype plugin indent on
-
-" C and C++ specific settings (C 語法縮排)
-autocmd FileType c,cpp set cindent
-
 "自動縮排
 "set ai == set autoindent
 set ai
 
 "在狀態欄顯示正在輸入的命令
 set showcmd
-
 "disable mouse for vim
 "autocmd BufEnter * set mouse=
-
 "設定 w!!，當忘記用sudo 編輯時用w!! 儲存
 cmap w!! w !sudo tee %
 
@@ -101,6 +65,20 @@ if &term =~ '256color'
 endif
 
 "}}}
+" 檔案格設定 {{{
+au FileType htmldjango,html,xml,css,ts set tabstop=2
+au FileType htmldjango,html,xml,css,ts set shiftwidth=2
+au FileType python set tabstop=4
+
+" C and C++ specific settings (C 語法縮排)
+autocmd FileType c,cpp set cindent
+
+set foldmethod=syntax
+au FileType python set foldmethod=indent
+au FileType vim,conf set foldmethod=marker foldlevel=0
+set foldlevel=99
+
+" }}}
 "其它設定{{{
 "tabline settin in .vim/plugin/tabline.vim
 hi TabLine     ctermfg=black ctermbg=white        "not active tab page label
@@ -117,19 +95,7 @@ hi VIMlogo     ctermfg=white ctermbg=blue
 set matchpairs+=<:>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " automatically read the file again when it changed outside vim
-set autoread
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldmethod=syntax
-au FileType python set foldmethod=indent
-au FileType vim,conf set foldmethod=marker foldlevel=0
-set foldlevel=99
-
-"let pyedit=expand('~/.vim/ftplugin/python_editing.vim')
-"if !filereadable(pyedit)
-"    silent !mkdir ~/.vim/ftplugin
-"    silent !wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-"endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 "顯示tab
 set list
 "讓tab顯示成 >- 而行尾多餘的空白顯示成 -
@@ -138,18 +104,12 @@ set listchars=tab:>-,trail:~
 "熱鍵設定{{{
 "map儲存
 map <F12> <ESC>:w<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map Ctrl-hjkl 為方向鍵
-"imap <C-h> <left>
-"imap <C-j> <down> "not work O_o
-"imap <C-k> <up>   "not work O_o
-"imap <C-l> <right>
-"強制不使用方向鍵
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"設qq為離開
+map qq :q<CR>
+"在man裡，設qq為強制離開
+au   FileType   man      map   qq       :q!<CR>
+
 "設定paste mode 的切換
 function! PasteSwitch()
     if &paste
@@ -159,12 +119,8 @@ function! PasteSwitch()
     endif
 endfunction
 map <leader>p :call PasteSwitch()<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"see :help key-notation
-"M(eta) is meta key
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"對視窗切換做map
 
+"對視窗切換做map
 nmap th <C-w>h
 nmap tj <C-w>j
 nmap tk <C-w>k
@@ -173,10 +129,10 @@ nmap tl <C-w>l
 nmap t\ :vsplit<CR>
 nmap t- :split<CR>
 " resize splited windows
-nmap <C-h> <C-w>5<
+nmap <C-h> <C-w>5>
 nmap <C-j> <C-w>5-
 nmap <C-k> <C-w>5+
-nmap <C-l> <C-w>5>
+nmap <C-l> <C-w>5<
 
 "設定換tab
 nmap tp :tabprevious<CR>
@@ -217,7 +173,6 @@ autocmd BufReadPost *
 "當你用 :make , :vimgrep
 "之類的指令時，產生的結果會顯示在另外一個新開的視窗，這個視窗就是
 "Quickfix，要自己叫出來就得用 :copen , :cclose , :clist 這類指令叫出來
-"
 "quickfix window toggle function
 "from c9s
 "leader 一般預設是 \
@@ -287,73 +242,6 @@ au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>
 au   FileType   sh       map   <F9>     :w<CR>:!sh %
 au   FileType   sh       map   <C-F9>   :w<CR>:!bash %<CR>
 
-"F11為使用gdb (c,cpp)
-"au   FileType   c,cpp    map   <F11>    :!gdb   -q   %<   <CR>
-
-"設qq為離開
-map qq :q<CR>
-"在man裡，設qq為強制離開
-au   FileType   man      map   qq       :q!<CR>
-
-" K to lookup current word in perldoc
-au FileType perl nmap K :!perldoc <cword> <bar><bar> perldoc -f <cword><CR><CR>
-
-" K to lookup current word in cppman
-au FileType cpp nmap K :!cppman <cword> <bar><bar> cppman -f <cword><CR><CR>
-"}}}
-"other syntax {{{
-" Markdown
-"au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,README.md  setf markdown
-au BufRead,BufNewFile *.md set filetype=markdown
-"}}}
-"vimgdb {{{
-"詳細請看vimgdb的code
-"let g:vimgdb_debug_file =""
-"在需要的時候按F12載入/移除vimgdb的map
-"map <F12> :run macros/gdb_mappings.vim<CR>
-"nmap <silent><LEADER>g :run macros/gdb_mappings.vim<cr>
-"map <leader>g :call gdb("")<CR>
-
-"set mouse=a
-" set gdb window initial height or width(if you set splitright)
-"set previewheight=50
-" don't show any assembly stuff
-" set asm=0
-" set GDB invocation string (default 'gdb')
-" set gdbprg=/usr/bin/gdb
-" map <C-F12> :bel 30vsplit gdb-variables<cr>
-
-"wait to fix
-"au FileType gdb set gdbprg=gdb\ --args
-
-" set gdb windows split in right side
-"set splitright
-" set gdb windows not split below
-"set nosplitbelow
-
-"let gdb_var_win = 0
-"function! GdbVar()
-"    if g:gdb_var_win
-"關閉視窗(未完成)
-"let g:gdb_var_win = 0
-"    else
-"        :bel 8 split gdb-variables<CR>
-"        let g:gdb_var_win = 1
-"    endif
-"endfunction
-
-"nmap <silent><> :call GdbVar()<CR>
-"nmap <silent><leader>v :bel 8 split gdb-variables<CR>
-
-"只要 Ctrl + V 就可以打開 variable window，要讓 variable 顯示在 variable
-"window 中，用 visual mode 選擇一個 variable ，之後再按 Ctrl + P ，即可
-"在vimgdb 的macros/gdb_mappings.vim裡：let s:gdb_k = 1
-"macros/gdb_mappings.vim
-"   ToggleGDB()
-"if s:gdb_k
-"    nmap <silent> <C-V> :bel 8 split gdb-variables<CR>  " setl ctrl+v show variable window in button
-"endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
 " Setting up vim-plug - the vim plugin manager{{{
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -395,6 +283,8 @@ Plug 'sainnhe/sonokai'
 Plug 'sheerun/vim-polyglot'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" C++ highlight with clangd
+Plug 'octol/vim-cpp-enhanced-highlight'
 " install needed language supports
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " C/C++ format
@@ -417,8 +307,158 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " }}}
 "Tagbar -----------------------------{{{
@@ -474,21 +514,7 @@ map <F2> :TaskList<CR>
 "
 "}}}
 " Syntastic ------------------------------{{{
-let g:syntastic_cpp_config_file = '.syntastic_include_config'
-let g:syntastic_c_config_file = '.syntastic_include_config'
 let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
-
-function! ToggleLocationList()
-    if g:loaded_syntastic_loclist == 0
-        let g:loaded_syntastic_loclist = 1
-        Error
-    elseif g:loaded_syntastic_loclist == 1
-        let g:loaded_syntastic_loclist = 0
-        lclose
-    endif
-endfunction
-
-map <leader>e :call ToggleLocationList()<cr>
 
 let g:syntastic_loc_list_height = 6
 " show list of errors and warnings on the current file
