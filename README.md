@@ -6,36 +6,21 @@ This is repo for my rc settings
 
 ### Install
 + `git clone https://github.com/daniel0076/rc.git` in you $HOME
-+ execute `link.sh` , will auto link them to you $HOME
++ execute `deploy.sh`, will auto deploy them to you $HOME
 + Modified the link in zshrc if you move .zsh to other places
 
-### YomCompleteMe
-Please see the [Installation DOC](https://github.com/Valloric/YouCompleteMe#installation)
-Below are my settings
+### Components
 
-+ precompile the completion support
-```
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer --gocode-completer
-```
-
-+ need to set the conf location
-```
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-```
-
-+ If you want to use Syntastic, set diagnostics ui to 0, or it will turn off Syntastic
-```
-let g:ycm_show_diagnostics_ui = 0
-```
-I like Syntastic more, please refer the doc for more information about YCM syntastic support
-
-### Syntastic
-`:help syntastic` to get the document
-
----
++ .vimrc (with coc.nvim support)
++ zshrc (based on oh-my-zsh)
++ tmux
 
 ## Change Log
+
+- 20210715
+    - switch to coc.nvim
+    - switch to tmux
+    - switch to zsh, based on oh-my-zsh
 
 - 20151105
 	- fix `link.sh` commented bug
