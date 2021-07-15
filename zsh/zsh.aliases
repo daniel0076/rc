@@ -12,9 +12,11 @@ if [[ $OS == "Darwin" ]];then
     alias sd="cd /Volumes/SD/"
 fi
 
-#bindkey
-bindkey '^[[A' up-line-or-search #type vim in shell and press up
-bindkey '^[[B' down-line-or-search
+# history search
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
+
 #generic aliases
 alias ptt="ssh bbsu@ptt.cc"
 alias tm="tmux"
