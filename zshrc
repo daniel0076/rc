@@ -19,7 +19,7 @@ if [ -f $HOME/rc/zsh/zsh-git-prompt/zshrc.sh ]; then
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/weiche/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
