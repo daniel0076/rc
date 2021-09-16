@@ -5,7 +5,7 @@ filetype plugin indent on
 " when scrolling, keep cursor 4 lines away from screen border
 set scrolloff=4
 " 開啟關鍵字上色功能
-syntax on
+"syntax on
 "airline的status bar正常運作，用來設定亞洲字形用幾格來顯示
 set ambiwidth=single
 " 定義tab 的空格數 (ts)
@@ -121,18 +121,18 @@ endfunction
 map <leader>p :call PasteSwitch()<CR>
 
 "對視窗切換做map
-nmap th <C-w>h
-nmap tj <C-w>j
-nmap tk <C-w>k
-nmap tl <C-w>l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 nmap t\ :vsplit<CR>
 nmap t- :split<CR>
 " resize splited windows
-nmap <C-h> <C-w>5>
-nmap <C-j> <C-w>5-
-nmap <C-k> <C-w>5+
-nmap <C-l> <C-w>5<
+nmap th <C-w>5>
+nmap tj <C-w>5-
+nmap tk <C-w>5+
+nmap tl <C-w>5<
 
 "設定換tab
 nmap tp :tabprevious<CR>
@@ -357,6 +357,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> ge <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -471,7 +472,8 @@ let g:tagbar_autofocus = 1
 "NERDTree -----------------------------{{{
 "
 " " toggle nerdtree display
-map <F3> :NERDTreeToggle<CR>
+"map <F3> :NERDTreeToggle<CR>
+map <F3> :CocCommand explorer<CR>
 " " open nerdtree with the current file selected
 nmap ,t :NERDTreeFind<CR>
 " " don;t show these file types
@@ -586,7 +588,13 @@ colorscheme sonokai
 set rtp+=/opt/local/share/fzf/vim
 " }}}
 " cscope{{{
-cs add ./cscope.out
+"cs add ./cscope.out
+
+" }}}
+" cpp-enhanced-highlight{{{
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_class_scope_highlight = 1
 
 " }}}
 "}}}
