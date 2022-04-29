@@ -53,6 +53,8 @@ set ai
 set showcmd
 "disable mouse for vim
 "autocmd BufEnter * set mouse=
+" enable mouse for vim
+set mouse=a
 "設定 w!!，當忘記用sudo 編輯時用w!! 儲存
 cmap w!! w !sudo tee %
 
@@ -103,7 +105,7 @@ set listchars=tab:>-,trail:~
 "}}}
 "熱鍵設定{{{
 "map儲存
-map <F12> <ESC>:w<CR>
+map s <ESC>:w<CR>
 
 "設qq為離開
 map qq :q<CR>
@@ -226,21 +228,15 @@ set tm=500
 "cmap !clang+r   !clang++ && ./%:r.out
 
 au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType cpp set makeprg=g++\ -std=c++11\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType cpp set makeprg=g++\ -std=c++14\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "會依照上面的map
-"python時，F9是python3，Ctrl+F9是python2
-"au   FileType   c        map   <F9>     :w<CR>:make && ./%:r.out<CR>
-"au   FileType   c        map   <F9>     :w<CR>:!gcr<CR>
-au   FileType   c,cpp     noremap   <F9>     :w<CR>:make && ./%:r.out<CR>
-au   FileType   c,cpp     noremap   <F8>     :w<CR>:make
-au   FileType   python    noremap   <F9>     :w<CR>:!python3   %<CR>
-au   FileType   python    noremap   <F8>   :w<CR>:!python2   %<CR>
-au   FileType   perl      noremap   <F9>     :w<CR>:!perl      %<CR>
-au   FileType   sh       map   <F9>     :w<CR>:!sh %
-au   FileType   sh       map   <C-F9>   :w<CR>:!bash %<CR>
+au   FileType   c,cpp     noremap   <C-F9>     :w<CR>:make && ./%:r.out<CR>
+au   FileType   c,cpp     noremap   <C-F8>     :w<CR>:make
+au   FileType   python    noremap   <C-F9>     :w<CR>:!python3   %<CR>
+au   FileType   sh        noremap   <C-F9>     :w<CR>:!sh %
 
 "}}}
 " Setting up vim-plug - the vim plugin manager{{{
@@ -281,14 +277,20 @@ Plug 'airblade/vim-gitgutter'
 " ColorScheme
 Plug 'sainnhe/sonokai'
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " C++ highlight with clangd
-Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 " install needed language supports
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-" C/C++ format
+" C/C++ format and highlighting
 Plug 'rhysd/vim-clang-format'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+" gdb support
+Plug 'puremourning/vimspector'
 
 " Initialize plugin system
 call plug#end()
@@ -424,11 +426,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -465,17 +462,16 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "Tagbar -----------------------------{{{
 "
 " " toggle tagbar display
-map <F4> :TagbarToggle<CR>
+map ,o :TagbarToggle<CR>
 " " autofocus on tagbar open
 let g:tagbar_autofocus = 1
 "}}}
 "NERDTree -----------------------------{{{
 "
-" " toggle nerdtree display
-"map <F3> :NERDTreeToggle<CR>
-map <F3> :CocCommand explorer<CR>
+" " toggle coc explorer
+map ,e :CocCommand explorer<CR>
 " " open nerdtree with the current file selected
-nmap ,t :NERDTreeFind<CR>
+nmap ,f :NERDTreeFind<CR>
 " " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 " close the nerdtree after file open
@@ -497,23 +493,8 @@ let NERDTreeQuitOnOpen=1
 "Tasklist ------------------------------{{{
 "
 " " show pending tasks list
-map <F2> :TaskList<CR>
+map <C-F2> :TaskList<CR>
 
-"}}}
-" Vim-debug ------------------------------{{{
-"
-" " disable default mappings, have a lot of conflicts with oter plugins
-" let g:vim_debug_disable_mappings = 1
-" " add some useful mappings
-" map <F5> :Dbg over<CR>
-" map <F6> :Dbg into<CR>
-" map <F7> :Dbg out<CR>
-" map <F8> :Dbg here<CR>
-" map <F9> :Dbg break<CR>
-" map <F10> :Dbg watch<CR>
-" map <F11> :Dbg down<CR>
-" map <F12> :Dbg up<CR>
-"
 "}}}
 " Syntastic ------------------------------{{{
 let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
@@ -585,7 +566,16 @@ colorscheme sonokai
 
 "}}}
 " fzf {{{
-set rtp+=/opt/local/share/fzf/vim
+" mappings
+nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
+nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
+nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <space>e       :<C-u>Files<CR>
+nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
+nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
 " }}}
 " cscope{{{
 "cs add ./cscope.out
@@ -596,5 +586,13 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_class_scope_highlight = 1
 
+" }}}
+" cxx-highlight {{{
+hi LspCxxHlGroupMemberVariable ctermfg=LightYellow guifg=LightYellow
+" }}}
+" vimspector {{{
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools']
+let g:vimspector_enable_mappings = 'HUMAN'
+nmap <Leader>di <Plug>VimspectorBalloonEval
 " }}}
 "}}}
