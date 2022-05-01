@@ -122,14 +122,14 @@ function! PasteSwitch()
 endfunction
 map <leader>p :call PasteSwitch()<CR>
 
-"對視窗切換做map
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-
-nmap t\ :vsplit<CR>
-nmap t- :split<CR>
+" Split window
+nmap sv :vsplit<CR><C-w>w
+nmap ss :split<CR><C-w>w
+" Move window
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
 " resize splited windows
 nmap th <C-w>5>
 nmap tj <C-w>5-
@@ -140,7 +140,7 @@ nmap tl <C-w>5<
 nmap tp :tabprevious<CR>
 nmap tn :tabnext<CR>
 nmap tt :tabe<SPACE>
-nmap ts :tab split<CR>
+nmap ts :tab split<space>
 nmap vs :vs<space>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,10 +233,9 @@ au FileType cpp set makeprg=g++\ -std=c++14\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "會依照上面的map
-au   FileType   c,cpp     noremap   <C-F9>     :w<CR>:make && ./%:r.out<CR>
-au   FileType   c,cpp     noremap   <C-F8>     :w<CR>:make
-au   FileType   python    noremap   <C-F9>     :w<CR>:!python3   %<CR>
-au   FileType   sh        noremap   <C-F9>     :w<CR>:!sh %
+au FileType c,cpp  noremap   <space>r     :w<CR>:make && ./%:r.out<CR>
+au FileType python noremap   <space>r     :w<CR>:!python3   %<CR>
+au FileType sh     noremap   <space>r     :w<CR>:!sh %
 
 "}}}
 " Setting up vim-plug - the vim plugin manager{{{
