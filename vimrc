@@ -270,7 +270,7 @@ Plug 'fisadev/FixedTaskList.vim'
 Plug 'michaeljsmith/vim-indent-object'
 "git related
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 " Python and other languages code checker
 "Plug 'scrooloose/syntastic'
 " ColorScheme
@@ -325,7 +325,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=400
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -357,8 +357,8 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
-nmap <silent> ge <Plug>(coc-definition)
+nmap <silent> td :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
