@@ -105,7 +105,7 @@ set listchars=tab:>-,trail:~
 "}}}
 "熱鍵設定{{{
 "map儲存
-map s <ESC>:w<CR>
+noremap <nowait> s <ESC>:w<CR>
 
 "設qq為離開
 map qq :q<CR>
