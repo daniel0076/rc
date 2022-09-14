@@ -70,7 +70,7 @@ endif
 " 檔案格設定 {{{
 au FileType htmldjango,html,xml,css,ts set tabstop=2
 au FileType htmldjango,html,xml,css,ts set shiftwidth=2
-au FileType python set tabstop=4
+au FileType python set tabstop=4 shiftwidth=4
 
 " C and C++ specific settings (C 語法縮排)
 autocmd FileType c,cpp set cindent
@@ -227,8 +227,8 @@ set tm=500
 "cmap !clang++   !clang++ -std=c++11 -g -Wall -Wextra -pedantic % -lm -g -o %:r.out
 "cmap !clang+r   !clang++ && ./%:r.out
 
-au FileType c   set makeprg=gcc\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
-au FileType cpp set makeprg=g++\ -std=c++14\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType c   set makeprg=clang\ -std=c11\ -Wall\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
+au FileType cpp set makeprg=clang++\ -std=gnu++20\ -Ofast\ %\ -lm\ -g\ -o\ %:r.out
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
