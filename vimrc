@@ -291,6 +291,9 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 " gdb support
 Plug 'puremourning/vimspector'
 
+" Copilot
+Plug 'github/copilot.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -304,8 +307,8 @@ call plug#end()
 " Edit them as you wish.
 " coc.nvim{{{
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-the-completion-experience
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 " Make <CR> auto-select the first completion item and notify coc.nvim to
@@ -497,7 +500,7 @@ map <C-F2> :TaskList<CR>
 
 "}}}
 " Syntastic ------------------------------{{{
-let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
+let g:syntastic_cpp_compiler_options = ' -std=c++2a -Wall'
 
 let g:syntastic_loc_list_height = 6
 " show list of errors and warnings on the current file
@@ -592,7 +595,9 @@ hi LspCxxHlGroupMemberVariable ctermfg=LightYellow guifg=LightYellow
 " }}}
 " vimspector {{{
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools']
-let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 nmap <Leader>di <Plug>VimspectorBalloonEval
 " }}}
-"}}}
+" copilot {{{
+
+" }}}
