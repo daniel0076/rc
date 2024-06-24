@@ -2,30 +2,42 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 #source other zsh configs
 
-if [[ -f $HOME/rc/zsh/zsh.env ]];then
-    source $HOME/rc/zsh/zsh.env
+ZSH_CONFIG=$HOME/rc/zsh
+
+if [[ -f $ZSH_CONFIG/zsh.env ]];then
+    source $ZSH_CONFIG/zsh.env
 fi
-if [[ -f $HOME/rc/zsh/zsh.aliases ]];then
-    source $HOME/rc/zsh/zsh.aliases
+if [[ -f $ZSH_CONFIG/zsh.aliases ]];then
+    source $ZSH_CONFIG/zsh.aliases
 fi
 
-#source all the plugins
-for files in $HOME/rc/zsh/plugins/*;do
-    source $files
-done
-#git status prompt
-if [ -f $HOME/rc/zsh/zsh-git-prompt/zshrc.sh ]; then
-    source $HOME/rc/zsh/zsh-git-prompt/zshrc.sh
+# Antigen
+source $ZSH_CONFIG/antigen/antigen.zsh
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git-prompt
+# Tell Antigen that you're done
+antigen apply
+
+#antigen theme mytheme
+antigen apply
+
+# use custom theme
+OMZ_THEME="$ZSH_CONFIG/mytheme.zsh-theme"
+if [[ -f $OMZ_THEME ]];then
+    source $OMZ_THEME
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/rc/zsh/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="mytheme"
+#ZSH_THEME="mytheme"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -89,7 +101,8 @@ ZSH_THEME="mytheme"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=()
 
-source $ZSH/oh-my-zsh.sh
+# we are now using antigen to manage plugins
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -117,7 +130,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

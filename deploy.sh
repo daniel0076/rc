@@ -1,29 +1,26 @@
 #!/bin/sh
 
-if [ ! -d "$HOME/.oh-my-zsh/" ]
-then
-    echo "installing oh-my-zsh at home"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
+SCRIPT_DIR="$(realpath $(dirname "$0"))"
+pushd "$SCRIPT_DIR" &> /dev/null || exit
+echo "cd to $SCRIPT_DIR"
+
+ZSH_DIR="$SCRIPT_DIR/zsh"
 
 files="vimrc zshrc gitconfig tmux.conf"
-dir=`env pwd`
 echo "linking rc files into $HOME"
 for f in $files;do
     if [ -f $HOME/.${f} ];then
-        echo ${f}
         rm $HOME/.${f}
     fi
-    env ln -s $dir/$f $HOME/.${f}
+    env ln -s "$SCRIPT_DIR/$f" "$HOME/.${f}"
     if [ $? -eq 0 ];then
         echo ".$f linked"
     fi
 done
 
 echo "initiating submodules"
-cd "./zsh/zsh-git-prompt"
-git submodule init
-git submodule update
+pushd "$ZSH_DIR" &> /dev/null
+git submodule update --init --recursive
+popd &> /dev/null
 
-echo "linking my custom theme"
-ln -s $dir/zsh/mytheme.zsh-theme $HOME/.oh-my-zsh/themes/
+popd &> /dev/null
