@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR="$(realpath $(dirname "$0"))"
 pushd "$SCRIPT_DIR" &> /dev/null || exit
@@ -22,5 +22,9 @@ echo "initiating submodules"
 pushd "$ZSH_DIR" &> /dev/null
 git submodule update --init --recursive
 popd &> /dev/null
+
+echo "installing fzf" # for vim and zsh
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 popd &> /dev/null

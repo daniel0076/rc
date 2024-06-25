@@ -11,6 +11,11 @@ if [[ -f $ZSH_CONFIG/zsh.aliases ]];then
     source $ZSH_CONFIG/zsh.aliases
 fi
 
+# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
 # Antigen
 source $ZSH_CONFIG/antigen/antigen.zsh
 # Load the oh-my-zsh's library.
@@ -19,6 +24,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git-prompt
 antigen bundle sudo
+antigen bundle fzf
 
 # Bundles from the other repos
 antigen bundle jeffreytse/zsh-vi-mode
@@ -135,5 +141,3 @@ plugins=()
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

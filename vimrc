@@ -255,8 +255,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-" Better file browser
-Plug 'scrooloose/nerdtree'
 " Code commenter https://github.com/scrooloose/nerdcommenter
 Plug 'scrooloose/nerdcommenter'
 " Class/module browser
@@ -276,8 +274,8 @@ Plug 'tpope/vim-fugitive'
 " ColorScheme
 Plug 'sainnhe/sonokai'
 Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' "needed for previews
 Plug 'antoinemadec/coc-fzf'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -306,6 +304,8 @@ call plug#end()
 "plugins settings and mappings
 " Edit them as you wish.
 " coc.nvim{{{
+let g:coc_global_extensions = ['coc-json', 'coc-explorer']
+
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources#improve-the-completion-experience
 inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
@@ -443,23 +443,8 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" toggle coc explorer
+map ,e :CocCommand explorer<CR>
 
 " }}}
 "Tagbar -----------------------------{{{
@@ -468,30 +453,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 map ,o :TagbarToggle<CR>
 " " autofocus on tagbar open
 let g:tagbar_autofocus = 1
-"}}}
-"NERDTree -----------------------------{{{
-"
-" " toggle coc explorer
-map ,e :CocCommand explorer<CR>
-" " open nerdtree with the current file selected
-nmap ,f :NERDTreeFind<CR>
-" " don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
-" close the nerdtree after file open
-let NERDTreeQuitOnOpen=1
-
-"-------按鍵說明
-"
-":NERDTree 開啟
-" ? Help
-" i 開在 split 視窗(水平)
-" s 開在 split 視窗(垂直)
-" t 開在新的 tab
-" o Open file / directory
-" x close directory
-" q 關掉
-"
-"
 "}}}
 "Tasklist ------------------------------{{{
 "
@@ -542,14 +503,6 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "}}}
-"pymode{{{
-let g:pymode_lint_checkers = ['pep8',]
-let g:pymode_lint_ignore = "E501,W"
-let g:pymode_lint_cwindow = 0
-" if you have large project in same dir, this can make rope faster
-let g:pymode_rope_autoimport = 0
-let g:pymode_rope_lookup_project = 0
-" }}}
 "colorscheme: Sonokai{{{
 " Put the color scheme install by vim-plug here so it can be automatically
 " activate
@@ -570,15 +523,18 @@ colorscheme sonokai
 "}}}
 " fzf {{{
 " mappings
-nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
-nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
-nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
-nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
-nnoremap <silent> <space>e       :<C-u>Files<CR>
-nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
-nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
-nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
-nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
+nnoremap <silent><nowait> <space><space> :<C-u>CocFzfList<CR>
+nnoremap <silent><nowait> <space>d       :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent><nowait> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
+nnoremap <silent><nowait> <space>c       :<C-u>CocFzfList commands<CR>
+nnoremap <silent><nowait> <space>e       :<C-u>Files<CR>
+nnoremap <silent><nowait> <space>l       :<C-u>CocFzfList location<CR>
+nnoremap <silent><nowait> <space>o       :<C-u>CocFzfList outline<CR>
+nnoremap <silent><nowait> <space>s       :<C-u>CocFzfList symbols<CR>
+nnoremap <silent><nowait> <space>p       :<C-u>CocFzfListResume<CR>
+" fzf preview bindkeys
+let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
+            \ --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
 " }}}
 " cscope{{{
 "cs add ./cscope.out
