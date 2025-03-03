@@ -18,6 +18,15 @@ for f in $files;do
     fi
 done
 
+echo "linking nvim files into .config"
+if [ ! -d $HOME/.config ];then
+    mkdir $HOME/.config
+fi
+if [ -d $HOME/.config/nvim ];then
+    rm -rf $HOME/.config/nvim
+fi
+env ln -s "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
+
 echo "initiating submodules"
 pushd "$ZSH_DIR" &> /dev/null
 git submodule update --init --recursive
