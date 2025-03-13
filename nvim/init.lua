@@ -2,6 +2,7 @@ vim.opt.scrolloff = 4
 vim.opt.ambiwidth = "single"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.showtabline = 2
 vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.ruler = true
@@ -27,23 +28,23 @@ end
 vim.opt.foldlevel = 99
 
 -- Key mappings
-vim.api.nvim_set_keymap("n", "s", "<ESC>:w<CR>", { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap("n", "qq", ":q<CR>", { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap("n", "<leader>p", ":set paste!<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "s", "<ESC>:w<CR>", { noremap = true, silent = true, nowait = true })
+vim.keymap.set("n", "qq", ":q<CR>", { noremap = true, silent = true, nowait = true })
+vim.keymap.set("n", "<leader>p", ":set paste!<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "tn", ":tabprevious<CR>", { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap("n", "tp", ":tabnext<CR>", { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap("n", "tt", ":tabedit<SPACE>", { noremap = true, silent = false, nowait = true })
-vim.api.nvim_set_keymap("n", "ts", ":tabsplit<SPACE>", { noremap = true, silent = false, nowait = true })
-vim.api.nvim_set_keymap("n", "vs", ":vs<SPACE>", { noremap = true, silent = false, nowait = true })
+vim.keymap.set("n", "tp", ":tabprevious<CR>", { noremap = true, silent = true, nowait = true })
+vim.keymap.set("n", "tn", ":tabnext<CR>", { noremap = true, silent = true, nowait = true })
+vim.keymap.set("n", "tt", ":tabedit<SPACE>", { noremap = true, silent = false, nowait = true })
+vim.keymap.set("n", "ts", ":tabsplit<SPACE>", { noremap = true, silent = false, nowait = true })
+vim.keymap.set("n", "vs", ":vs<SPACE>", { noremap = true, silent = false, nowait = true })
 
 -- Window management
-vim.api.nvim_set_keymap("n", "sv", ":vsplit<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "ss", ":split<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "sh", "<C-w>h", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "sl", "<C-w>l", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "sk", "<C-w>k", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "sj", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "sv", ":vsplit<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "ss", ":split<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "sh", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "sl", "<C-w>l", { noremap = true, silent = true })
+vim.keymap.set("n", "sk", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "sj", "<C-w>j", { noremap = true, silent = true })
 
 -- Plugin management
 -- Auto-install vim-plug if it is not already installed
@@ -58,38 +59,33 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
--- Code commenter https://github.com/scrooloose/nerdcommenter
-Plug('scrooloose/nerdcommenter')
-
--- Class/module browser
-Plug('majutsushi/tagbar')
-
--- Airline
-Plug('vim-airline/vim-airline')
-Plug('vim-airline/vim-airline-themes')
-
--- Pending tasks list
-Plug('fisadev/FixedTaskList.vim')
-
---git related
-Plug('tpope/vim-fugitive')
-
--- ColorScheme
-Plug('sainnhe/sonokai')
-
--- FZF
-Plug('junegunn/fzf', { ['do'] = function()
-  vim.fn['fzf#install']()
-end })
-Plug('junegunn/fzf.vim')
-Plug('antoinemadec/coc-fzf')
-
-
--- Autocomplete
-Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
-
--- Copilot
-Plug('github/copilot.vim')
+if not vim.g.vscode then
+    -- ordinary Neovim
+  -- Code commenter https://github.com/scrooloose/nerdcommenter
+  Plug('scrooloose/nerdcommenter')
+  -- Class/module browser
+  Plug('majutsushi/tagbar')
+  -- Airline
+  Plug('vim-airline/vim-airline')
+  Plug('vim-airline/vim-airline-themes')
+  -- Pending tasks list
+  Plug('fisadev/FixedTaskList.vim')
+  --git related
+  Plug('tpope/vim-fugitive')
+  -- ColorScheme
+  Plug('sainnhe/sonokai')
+  -- FZF
+  Plug('junegunn/fzf', { ['do'] = function()
+    vim.fn['fzf#install']()
+  end })
+  Plug('junegunn/fzf.vim')
+  Plug('antoinemadec/coc-fzf')
+  -- Copilot
+  Plug('github/copilot.vim')
+end
+-- both Neovim and VSCode
+  -- Autocomplete
+  Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 
 vim.call('plug#end')
 

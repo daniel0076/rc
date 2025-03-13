@@ -154,7 +154,7 @@ set wildignore+=*.git*,*.hg*,*.svn* " version control system
 " set wildignore+=tmp/**
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自動移除每行最後多餘的空白
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " 按 = 自動 format
 autocmd FileType c,cpp,objc nnoremap <buffer>= :<C-u>ClangFormat<CR>
