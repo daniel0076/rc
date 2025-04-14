@@ -4,7 +4,7 @@
 vim.g.coc_global_extensions = {
     'coc-json',
     'coc-yaml',
-    'coc-python',
+    'coc-pyright',
     'coc-highlight',
     'coc-explorer',
     'coc-clangd',

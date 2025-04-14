@@ -29,22 +29,42 @@ vim.opt.foldlevel = 99
 
 -- Key mappings
 vim.keymap.set("n", "s", "<ESC>:w<CR>", { noremap = true, silent = true, nowait = true })
-vim.keymap.set("n", "qq", ":q<CR>", { noremap = true, silent = true, nowait = true })
-vim.keymap.set("n", "<leader>p", ":set paste!<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "tp", ":tabprevious<CR>", { noremap = true, silent = true, nowait = true })
-vim.keymap.set("n", "tn", ":tabnext<CR>", { noremap = true, silent = true, nowait = true })
+-- VSCode-specific mappings
+if vim.g.vscode then
+    -- Use VSCode commands for tab and quit operations
+    vim.keymap.set("n", "qq", "<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "tp", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "tn", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>", { noremap = true, silent = true })
+else
+    -- Regular Neovim mappings
+    vim.keymap.set("n", "qq", ":q<CR>", { noremap = true, silent = true, nowait = true })
+    vim.keymap.set("n", "tp", ":tabprevious<CR>", { noremap = true, silent = true, nowait = true })
+    vim.keymap.set("n", "tn", ":tabnext<CR>", { noremap = true, silent = true, nowait = true })
+end
+
 vim.keymap.set("n", "tt", ":tabedit<SPACE>", { noremap = true, silent = false, nowait = true })
 vim.keymap.set("n", "ts", ":tabsplit<SPACE>", { noremap = true, silent = false, nowait = true })
 vim.keymap.set("n", "vs", ":vs<SPACE>", { noremap = true, silent = false, nowait = true })
 
 -- Window management
-vim.keymap.set("n", "sv", ":vsplit<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "ss", ":split<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "sh", "<C-w>h", { noremap = true, silent = true })
-vim.keymap.set("n", "sl", "<C-w>l", { noremap = true, silent = true })
-vim.keymap.set("n", "sk", "<C-w>k", { noremap = true, silent = true })
-vim.keymap.set("n", "sj", "<C-w>j", { noremap = true, silent = true })
+if vim.g.vscode then
+    -- VSCode window management
+    vim.keymap.set("n", "sv", "<Cmd>call VSCodeNotify('workbench.action.splitEditorRight')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "ss", "<Cmd>call VSCodeNotify('workbench.action.splitEditorDown')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "sh", "<Cmd>call VSCodeNotify('workbench.action.focusLeftGroup')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "sl", "<Cmd>call VSCodeNotify('workbench.action.focusRightGroup')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "sk", "<Cmd>call VSCodeNotify('workbench.action.focusAboveGroup')<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "sj", "<Cmd>call VSCodeNotify('workbench.action.focusBelowGroup')<CR>", { noremap = true, silent = true })
+else
+    -- Regular Neovim window management
+    vim.keymap.set("n", "sv", ":vsplit<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "ss", ":split<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "sh", "<C-w>h", { noremap = true, silent = true })
+    vim.keymap.set("n", "sl", "<C-w>l", { noremap = true, silent = true })
+    vim.keymap.set("n", "sk", "<C-w>k", { noremap = true, silent = true })
+    vim.keymap.set("n", "sj", "<C-w>j", { noremap = true, silent = true })
+end
 
 -- Plugin management
 -- Auto-install vim-plug if it is not already installed
@@ -82,29 +102,30 @@ if not vim.g.vscode then
   Plug('antoinemadec/coc-fzf')
   -- Copilot
   Plug('github/copilot.vim')
-end
--- both Neovim and VSCode
   -- Autocomplete
   Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+end
+-- both Neovim and VSCode
 
 vim.call('plug#end')
 
 -- All plugins are loaded after this line, configure them below
--- Coc settings
-require('coc')
+if not vim.g.vscode then
+  -- Coc settings
+  require('coc')
 
--- Ctags
-require('ctags')
+  -- Ctags
+  require('ctags')
 
--- Airline settings
-require('airline')
+  -- Airline settings
+  require('airline')
 
--- Fzf mappings
-require('fzf')
+  -- Fzf mappings
+  require('fzf')
 
-
--- ColorScheme
-if vim.fn.has('termguicolors') then
-  vim.o.termguicolors = true
+  -- ColorScheme
+  if vim.fn.has('termguicolors') then
+    vim.o.termguicolors = true
+  end
+  require('sonokai')
 end
-require('sonokai')
