@@ -92,6 +92,8 @@ if not vim.g.vscode then
   Plug('fisadev/FixedTaskList.vim')
   --git related
   Plug('tpope/vim-fugitive')
+  -- Syntax highlighting
+  Plug('sheerun/vim-polyglot')
   -- ColorScheme
   Plug('sainnhe/sonokai')
   -- FZF

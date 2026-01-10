@@ -20,6 +20,7 @@ bindkey "^[[B" history-search-forward
 #generic aliases
 alias ptt="ssh bbsu@ptt.cc"
 alias tm="tmux"
+alias vim="nvim"
 
 #arch pacman alias
 if [[ -e /usr/bin/pacman ]]; then

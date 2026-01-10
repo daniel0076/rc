@@ -22,12 +22,12 @@ source $ZSH_CONFIG/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git-prompt
 antigen bundle sudo
 antigen bundle fzf
 
 # Bundles from the other repos
 antigen bundle jeffreytse/zsh-vi-mode
+antigen bundle woefe/git-prompt.zsh
 
 # Tell Antigen that you're done
 antigen apply

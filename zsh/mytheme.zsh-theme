@@ -10,7 +10,7 @@ else
 fi
 
 local current_dir='%{$terminfo[bold]$fg[green]%}[%~] %{$reset_color%}'
-local git_branch='$(git_super_status)'
+local git_branch='$(gitprompt)'
 local rvm_ruby='$(ruby_prompt_info)'
 local venv_prompt='$(virtualenv_prompt_info)'
 
